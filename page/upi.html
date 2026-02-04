@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Payment Method</title>
+<link rel="stylesheet" href="../page/css/upi.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+
+
+<header>
+  <div class="logo-container">
+    <img src="../assets/logo.png" alt="Doughlightful Logo">
+    <h1>DOUGHLIGHTFUL</h1>
+  </div>
+
+  <nav>
+    <a href="../page/home.html">HOME</a>
+    <a href="../page/product.html">PRODUCTS</a>
+    <a href="../page/recipe.html">RECIPES</a>
+    <a href="../page/about.html">ABOUT US</a>
+  </nav>
+</header>
+
+
+<div class="container">
+  <h1>Select Payment Method</h1>
+
+  <div class="payment-box">
+    <label>
+      <input type="radio" name="payment" value="cod" checked>
+      Cash on Delivery
+    </label>
+
+    <label>
+      <input type="radio" name="payment" value="upi">
+      UPI
+    </label>
+
+    <label>
+      <input type="radio" name="payment" value="card">
+      Card (Debit / Credit)
+    </label>
+  </div>
+
+  <div class="extra-fields" id="upiFields">
+    <label>UPI ID</label>
+    <input type="text" placeholder="example@upi">
+    <label>Account Holder Name</label>
+    <input type="text" placeholder="Your Name">
+  </div>
+
+  <div class="extra-fields" id="cardFields">
+    <label>Card Number</label>
+    <input type="text" placeholder="1234 5678 9012 3456">
+    <label>CVV</label>
+    <input type="password" placeholder="***">
+  </div>
+
+  <a href="../page/orderconfirmend.html"><button class="confirm-btn">Confirm Payment</button></a>
+</div>
+
+<script>
+const options = document.querySelectorAll('input[name="payment"]');
+const upi = document.getElementById('upiFields');
+const card = document.getElementById('cardFields');
+
+options.forEach(opt => {
+  opt.addEventListener('change', () => {
+    upi.style.display = 'none';
+    card.style.display = 'none';
+    if (opt.value === 'upi') upi.style.display = 'block';
+    if (opt.value === 'card') card.style.display = 'block';
+  });
+});
+</script>
+
+</body>
+</html>

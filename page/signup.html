@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Doughlightful Sign Up</title>
+  <link rel="stylesheet" href="../page/css/signup.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <a href="home.html"><img src="../assets/logo.png" alt="Doughlightful Logo" /></a>
+      <h1>DOUGHLIGHTFUL</h1>
+    </div>
+     <nav>
+      <ul class="nav-links">
+        <li><a href="../page/home.html">HOME</a></li>
+        <li><a href="../page/product.html">PRODUCTS</a></li>
+        <li><a href="../page/recipe.html">RECIPES</a></li>
+        <li><a href="../page/about.html">ABOUT US</a></li>
+        <a href="order.html"><i class="fa-solid fa-cart-shopping"></i></a>
+        <a href="../page/profile.html"><i class="fa-solid fa-user"></i></a>
+      </ul>
+    </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="signin-box">
+      <img src="../assets/logo.png" class="image-logo" alt="Logo"/>
+      <h2>Welcome to Doughlightful</h2>
+
+      <div class="tabs">
+        <button class="active">Sign up</button>
+        <a href="signin.html"><button>Sign in</button></a> 
+      </div>
+
+      <form>
+        <label>Name:</label>
+        <input type="text" placeholder="Enter your name" required />
+
+        <label>Email:</label>
+        <input type="email" placeholder="Enter your email" required />
+
+        <label>Password:</label>
+        <input type="password" placeholder="Enter your password" required />
+
+        <label>Confirm Password:</label>
+        <input type="password" placeholder="Confirm your password" required />
+
+        <label>Phone no:</label>
+        <input type="number" placeholder="Enter your Phone no. " required />
+
+        <p class="end">I want to join as:</p>
+        <div class="tabs">
+          <a href="../page/home.html"><button type="button" class="active">Customer</button></a>
+          <a href="../page/seller/seller_home.html"><button type="button">Baker</button></a>
+        </div>
+
+        <button type="submit" class="form-button">Create Account</button>
+      </form>
+
+      <a href="home.html"><p class="guest">Continue as guest</p></a>
+    </div>
+  </main>
+
+</body>
+</html>

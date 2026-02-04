@@ -1,0 +1,79 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f4f7f5; /* Light white background */
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Notification Box */
+.notification {
+  background-color: #ffffff;
+  padding: 40px 50px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  text-align: center;
+}
+
+/* Success Icon */
+.success-icon {
+  font-size: 55px;
+  color: #2e7d32; /* Green */
+  margin-bottom: 20px;
+}
+
+/* Message */
+.notification h2 {
+  font-size: 26px;
+  color: #2e7d32; /* Green heading */
+  margin-bottom: 10px;
+}
+
+.notification p {
+  color: #4caf50; /* Soft green */
+  font-size: 16px;
+  margin-bottom: 25px;
+}
+
+/* Button */
+.notification a {
+  text-decoration: none;
+}
+
+.notification button {
+  padding: 10px 25px;
+  font-size: 16px;
+  border-radius: 25px;
+  border: none;
+  background-color: #2e7d32;
+  color: #ffffff;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.notification button:hover {
+  background-color: #1b5e20;
+  transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 500px) {
+  .notification {
+    padding: 25px 20px;
+  }
+
+  .notification h2 {
+    font-size: 22px;
+  }
+
+  .notification p {
+    font-size: 14px;
+  }
+}

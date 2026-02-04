@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Recipe</title>
+    <link rel="stylesheet" href="../css/sellerCSS/add_recipe.css">
+</head>
+<body>
+
+<div class="container">
+
+    <!-- Vertical Navbar (SAME as product page) -->
+    <div class="sidebar">
+        <h1>Doughlightful</h1>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="add_product.html">Add Product</a>
+        <a href="add_recipe.html" class="active">Add Recipe</a>
+        <a href="logout.html">signout</a>
+    </div>
+
+    <!-- Recipe Content -->
+    <div class="content">
+        <div class="content-box">
+            <h2>Add Recipe</h2>
+
+            <form class="recipe-form">
+                 <label>Seller Name</label>
+                <input type="text" placeholder="Enter seller name">
+                <label>Recipe Name</label>
+
+                <input type="text" placeholder="Enter recipe name">
+
+                <label>Recipe Image</label>
+                <input type="file">
+
+                <label>Ingredients</label>
+                <textarea placeholder="Enter ingredients"></textarea>
+
+                <label>Steps</label>
+                <textarea placeholder="Enter cooking steps"></textarea>
+
+                <label>Cooking Time</label>
+                <input type="text" placeholder="Eg: 30 minutes">
+
+                <a href="recipe_succ.html"><button type="button" class="active">Add Recipe</button></a>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

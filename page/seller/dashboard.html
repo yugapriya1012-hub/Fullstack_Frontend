@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bakery Seller Dashboard</title>
+    <link rel="stylesheet" href="../css/sellerCSS/dashboard.css">
+</head>
+<body>
+
+<div class="layout">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <h1>Doughlightful</h1>
+        <a href="dashboard.html" class="active">Dashboard</a>
+        <a href="add_product.html">Add Product</a>
+        <a href="add_recipe.html">Add Recipe</a>
+        <a href="logout.html">Sign Out</a>
+    </aside>
+
+    <!-- Main content -->
+    <main class="main">
+
+        <!-- Top Bar -->
+        <div class="topbar">
+            <input type="text" placeholder="Search products...">
+        </div>
+
+        <!-- Metrics Cards -->
+        <div class="cards">
+            <div class="card">
+                <h4>Revenue</h4>
+                <h2>₹2,500 <span class="up">+30%</span></h2>
+                <div class="chart"></div>
+            </div>
+
+            <div class="card">
+                <h4>Income</h4>
+                <h2>₹1,200 <span class="up">+10%</span></h2>
+                <div class="bar-chart">
+                    <span style="height:40%"></span>
+                    <span style="height:70%"></span>
+                    <span style="height:60%"></span>
+                    <span style="height:80%"></span>
+                    <span style="height:50%"></span>
+                </div>
+            </div>
+
+            <div class="card">
+                <h4>Expenses</h4>
+                <h2>₹800 <span class="up">+5%</span></h2>
+                <div class="bar-chart">
+                    <span style="height:50%"></span>
+                    <span style="height:30%"></span>
+                    <span style="height:70%"></span>
+                    <span style="height:60%"></span>
+                    <span style="height:40%"></span>
+                </div>
+            </div>
+
+            <div class="card">
+                <h4>Visitors</h4>
+                <h2>500 <span class="up">+5%</span></h2>
+                <div class="bar-chart">
+                    <span style="height:60%"></span>
+                    <span style="height:80%"></span>
+                    <span style="height:50%"></span>
+                    <span style="height:70%"></span>
+                    <span style="height:40%"></span>
+                </div>
+            </div>
+
+            <div class="card">
+                <h4>Customers</h4>
+                <h2>1,200 <span class="up">+30%</span></h2>
+                <div class="bar-chart">
+                    <span style="height:40%"></span>
+                    <span style="height:50%"></span>
+                    <span style="height:60%"></span>
+                    <span style="height:70%"></span>
+                    <span style="height:50%"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stock Products & Best Category -->
+        <div class="cards">
+
+            <div class="card">
+                <h4>Stock Products</h4>
+                <div class="stock">
+                    <!-- <img src="" alt="Croissant"> -->
+                    <img src="https://static-assets-prod.fnp.com/images/pr/m/v20250901173952/eggless-black-forest-bento-birthday-cake.jpg" alt="Puff Pastry">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSq2gaygC8xJJSyCjn021Yem7AdW9PU5XQygA&s" alt="Strudel">
+                </div>
+            </div>
+
+            <div class="card">
+                <h4>Best Categories</h4>
+                <div class="item">
+                    <p>Pastry</p>
+                    <div class="progress"><div style="width:85%"></div></div>
+                </div>
+                <div class="item">
+                    <p>Bread</p>
+                    <div class="progress"><div style="width:65%"></div></div>
+                </div>
+                <div class="item">
+                    <p>Cakes</p>
+                    <div class="progress"><div style="width:55%"></div></div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h4>Last Transactions</h4>
+                <div class="transaction">
+                    <img src="https://static-assets-prod.fnp.com/images/pr/m/v20250901173952/eggless-black-forest-bento-birthday-cake.jpg">
+                    <div>
+                        <p>Cake</p>
+                        <small>Cash on Delivery</small>
+                    </div>
+                    <span>₹299</span>
+                </div>
+                <div class="transaction">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRC3_SF4cnXUIBKXiZBT7CpKM5lNn23F_O4LA&s">
+                    <div>
+                        <p>Chocolate</p>
+                        <small>Cash on Delivery </small>
+                    </div>
+                    <span>₹290</span>
+                </div>
+               
+            </div>
+
+        </div>
+
+    </main>
+
+</div>
+
+</body>
+</html>

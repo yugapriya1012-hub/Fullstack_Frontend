@@ -1,0 +1,93 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f8;
+}
+.container {
+    display: flex;
+    height: 100vh;
+}
+
+
+
+.sidebar {
+    width: 220px;
+    background: #fff;
+    padding: 25px;
+    box-shadow: 2px 0 10px rgba(0,0,0,0.05);
+}
+
+.sidebar h2 {
+    margin-bottom: 30px;
+}
+.sidebar h1{
+    color:red;
+}
+.sidebar a {
+    display: block;
+    padding: 12px;
+    margin-bottom: 10px;
+    text-decoration: none;
+    color: #555;
+    border-radius: 10px;
+}
+
+.sidebar a.active,
+.sidebar a:hover {
+    background: #ff7a59;
+    color: white;
+}
+.content {
+    flex: 1;
+    padding: 30px;
+    overflow-y: auto;
+
+    display: flex;
+    justify-content: center;   
+}
+
+.content-box h2 {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+
+.recipe-form {
+    width: 450px;
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.recipe-form label {
+    display: block;
+    margin-top: 12px;
+    font-weight: bold;
+}
+
+.recipe-form input,
+.recipe-form textarea {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.recipe-form textarea {
+    height: 90px;
+    resize: none;
+}
+
+.recipe-form button {
+    margin-top: 20px;
+    width: 100%;
+    padding: 10px;
+    background-color:  #ff7a59;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+}

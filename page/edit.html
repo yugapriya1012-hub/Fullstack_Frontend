@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit Profile</title>
+  <link rel="stylesheet" href="../page/css/edit.css">
+</head>
+<body>
+
+<div class="box">
+  <h3 style="text-align:center">Edit Profile</h3>
+
+
+  <img id="profileImg" src="profile.jpg">
+  <input type="file" accept="image/*" onchange="previewImage(event)">
+
+  <label>Name</label>
+  <input type="text" placeholder="Enter your name">
+
+  <label>Email</label>
+  <input type="email" placeholder="Enter your email">
+
+  <label>Date of Birth</label>
+  <input type="date" >
+
+  <label>Bio</label>
+  <textarea>Write something about yourself</textarea>
+
+  <button onclick="updateProfile()">Save</button>
+</div>
+
+<script>
+  function previewImage(event) {
+    document.getElementById("profileImg").src =
+      URL.createObjectURL(event.target.files[0]);
+  }
+
+  function updateProfile() {
+    alert("Profile updated successfully");
+  }
+</script>
+
+</body>
+</html>

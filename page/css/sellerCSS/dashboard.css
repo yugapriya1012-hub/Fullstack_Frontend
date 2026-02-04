@@ -1,0 +1,168 @@
+body {
+    margin: 0;
+    font-family: "Segoe UI", sans-serif;
+    background: #f6f4ef;
+}
+
+
+.layout {
+    display: flex;
+    height: 100vh;
+}
+
+
+.sidebar {
+    width: 220px;
+    background: #fff;
+    padding: 25px;
+    box-shadow: 2px 0 10px rgba(0,0,0,0.05);
+}
+
+.sidebar h2 {
+    margin-bottom: 30px;
+}
+
+.sidebar h1{
+    color:red;
+}
+.sidebar a {
+    display: block;
+    padding: 12px;
+    margin-bottom: 10px;
+    text-decoration: none;
+    color: #555;
+    border-radius: 10px;
+}
+
+.sidebar a.active,
+.sidebar a:hover {
+    background: #ff7a59;
+    color: white;
+}
+
+
+.main {
+    flex: 1;
+    padding: 30px;
+    overflow-y: auto;
+}
+
+
+.topbar input {
+    width: 300px;
+    padding: 10px 15px;
+    border-radius: 20px;
+    border: none;
+    outline: none;
+}
+
+
+.cards {
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+}
+
+
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+}
+
+.card h4 {
+    color: #888;
+    margin-bottom: 10px;
+}
+
+.card h2 {
+    margin: 0;
+}
+
+.up {
+    color: #ff7a59;
+    font-size: 14px;
+}
+
+
+.chart {
+    margin-top: 15px;
+    height: 60px;
+    background: linear-gradient(90deg, #ff7a59, #ffd6cc);
+    border-radius: 15px;
+}
+
+
+.bar-chart {
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+    height: 70px;
+    margin-top: 15px;
+}
+
+.bar-chart span {
+    width: 12px;
+    background: #ff7a59;
+    border-radius: 10px;
+}
+
+
+.stock {
+    display: flex;
+    gap: 12px;
+    margin-top: 15px;
+}
+
+.stock img {
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+}
+
+
+.item {
+    margin-top: 12px;
+}
+
+.item p {
+    margin: 0 0 5px;
+    font-size: 14px;
+}
+
+.progress {
+    background: #f0f0f0;
+    height: 8px;
+    border-radius: 10px;
+}
+
+.progress div {
+    height: 100%;
+    background: #ff7a59;
+    border-radius: 10px;
+}
+
+
+.transaction {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 12px;
+}
+
+.transaction img {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+}
+
+.transaction p {
+    margin: 0;
+    font-size: 14px;
+}
+
+.transaction small {
+    color: #999;
+}

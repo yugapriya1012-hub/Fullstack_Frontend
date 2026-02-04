@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Order Summary</title>
+<style>
+/* Reset & body */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(to right, #ff7a59, #ffb199);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* Container */
+.order-container {
+    width: 100%;
+    max-width: 800px;
+    background: #fff;
+    border-radius: 15px;
+    padding: 30px 40px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    animation: fadeIn 0.8s ease;
+}
+
+/* Headings */
+h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #333;
+}
+
+/* Products Summary */
+.products-summary {
+    margin-bottom: 25px;
+}
+.products-summary ul {
+    list-style-type: none;
+}
+.products-summary li {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 15px;
+    margin-bottom: 10px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    font-weight: 500;
+}
+.total-price {
+    text-align: right;
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+/* Delivery options */
+.delivery-options {
+    margin-top: 25px;
+}
+.delivery-options label {
+    font-weight: 600;
+    display: block;
+    margin-bottom: 5px;
+}
+.delivery-options input, 
+.delivery-options select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    margin-bottom: 15px;
+}
+
+/* Pay button */
+button {
+    width: 100%;
+    padding: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    background: #ff7a59;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+button:hover { opacity: 0.9; }
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.95);}
+    to { opacity: 1; transform: scale(1);}
+}
+
+/* Responsive */
+@media(max-width: 600px){
+    .order-container {
+        padding: 20px;
+    }
+    .products-summary li {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .total-price {
+        text-align: left;
+    }
+}
+</style>
+</head>
+<body>
+
+<div class="order-container">
+  <h2>Order Summary</h2>
+
+  <!-- Products Summary -->
+  <div class="products-summary">
+    <ul>
+      <li><span>Cake</span> <span>2 x ₹200 = ₹400</span></li>
+      <li><span>Bread</span> <span>3 x ₹50 = ₹150</span></li>
+      <li><span>Cookies</span> <span>5 x ₹100 = ₹500</span></li>
+    </ul>
+    <div class="total-price">Total Price: ₹1050</div>
+  </div>
+
+  <!-- Delivery Options -->
+  <div class="delivery-options">
+    <label>Delivery Date:</label>
+    <input type="text" value="2026-01-05" readonly>
+
+    <label>Delivery Time:</label>
+    <input type="text" value="12:00 PM - 2:00 PM" readonly>
+
+    <label>Delivery Address:</label>
+    <input type="text" value="123 Main Street, Chennai" readonly>
+
+  </div>
+
+  <!-- Payment -->
+  <a href="../page/confirmed.html"><button>Proceed to Payment</button></a>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Order Summary</title>
+<link rel="stylesheet" href="../page/css/name.css">
+</head>
+
+<body>
+
+<div class="bakery-card">
+  <div class="bakery-header">
+    <h2>Order Summary</h2>
+    <p>Review and confirm your order</p>
+  </div>
+
+  <div class="content">
+    <h3>Your Selection</h3>
+    <div class="item-box">
+      <div class="item-row">
+        <span class="item-name">Chocolate Cake</span>
+        <span>50</span>
+      </div>
+      <div class="item-qty">Quantity: 1</div>
+    </div>
+
+    <h3>Delivery Preference</h3>
+    <div class="delivery-grid">
+      <label class="delivery-card">
+        <input type="radio" name="delivery" checked>
+        <strong>Home Delivery</strong>
+        <small>50</small>
+      </label>
+
+      <!-- <label class="delivery-card">
+        <input type="radio" name="delivery">
+        <strong>Store Pickup</strong>
+        <small>Free</small>
+      </label> -->
+    </div>
+
+    <h3>Select Date & Time</h3>
+    <div class="schedule-box">
+      <div class="input-group">
+        <label>Date</label>
+        <input type="date" id="orderDate">
+      </div>
+      <div class="input-group">
+        <label>Time</label>
+        <input type="time" value="09:00">
+      </div>
+    </div>
+
+    <div class="summary-totals">
+      <div class="total-row">
+        <span>Total</span>
+        <span class="final-price">50</span>
+      </div>
+    </div>
+
+    <a href="../page/upi.html"><button class="order-btn">Place Order</button></a>
+
+    <a href="../page/product.html" class="back-link">← Back to products</a>
+  </div>
+</div>
+
+<script>
+  const dateInput = document.getElementById("orderDate");
+  const today = new Date().toISOString().split("T")[0];
+  dateInput.min = today;
+</script>
+
+</body>
+</html>

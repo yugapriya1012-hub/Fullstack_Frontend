@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Profile Page</title>
+  <link rel="stylesheet" href="../page/css/profile.css">
+</head>
+<body>
+
+<div class="box">
+  <h3 style="text-align:center">My Profile</h3>
+
+  
+  <img id="profileImg" src="profile.jpg" alt="Profile Image">
+  <input type="file" accept="image/*" onchange="previewImage(event)">
+
+  <label>Name</label>
+  <input type="text" placeholder="Enter your name">
+
+  <label>Email</label>
+  <input type="email" placeholder="Enter your email">
+
+  <label>Date of Birth</label>
+  <input type="date">
+
+  <label>Bio</label>
+  <textarea placeholder="Write something about yourself"></textarea>
+
+ 
+  <div class="btns">
+    <button class="edit" onclick="goEdit()">Edit</button>
+    <button class="save" onclick="saveProfile()">Save</button>
+  </div>
+</div>
+
+<script>
+  function goEdit() {
+    window.location.href = "edit.html";
+  }
+
+  function saveProfile() {
+    alert("Profile saved successfully");
+  }
+
+  function previewImage(event) {
+    document.getElementById("profileImg").src =
+      URL.createObjectURL(event.target.files[0]);
+  }
+</script>
+
+</body>
+</html>

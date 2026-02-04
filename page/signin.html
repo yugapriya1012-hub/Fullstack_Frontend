@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Doughlightful Sign In</title>
+  <link rel="stylesheet" href="../page/css/signin.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  /* background-color: #fbffe0cd; */
+  margin: 0;
+}
+
+/* ===== Header ===== */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  padding: 10px 30px;
+  border-bottom: 1px solid #ccc;
+  position: relative;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo img {
+  height: 50px;
+  margin-right: 10px;
+}
+
+.logo h1 {
+  color: #e84a5f;
+  margin: 0;
+  font-size: 22px;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+nav a {
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+
+.nav-links {
+      display: flex;
+      list-style: none;
+      gap: 25px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: black;
+      font-weight: 500;
+    }
+nav a:hover {
+  color: #e84a5f;
+}
+
+.menu-toggle {
+  display: none;
+  font-size: 26px;
+  cursor: pointer;
+}
+
+/* ===== Main ===== */
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px 20px;
+  min-height: 80vh;
+}
+
+.signin-box {
+  /* background: #fff0f0; */
+  padding: 25px;
+  border-radius: 10px;
+  width: 380px;
+  max-width: 90%;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.image-logo {
+  height: 60px;
+  margin-bottom: 10px;
+}
+
+h2 {
+  color: #e84a5f;
+  margin-bottom: 10px;
+}
+
+/* Tabs */
+.tabs {
+  margin-bottom: 15px;
+}
+
+.tabs button {
+  background: rgb(227, 165, 165);
+  border: none;
+  padding: 10px 20px;
+  font-weight: bold;
+  margin: 10px 5px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.tabs .active {
+  background: #ea9d9d;
+}
+
+/* Form */
+form {
+  margin-top: 10px;
+  text-align: left;
+}
+
+form label {
+  display: block;
+  margin-top: 10px;
+  font-weight: bold;
+  color: #444;
+}
+
+form input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.form-button {
+  width: 100%;
+  margin-top: 15px;
+  background: #aea7a7;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.form-button:hover {
+  background: #e84a5f;
+}
+
+/* Demo text */
+.demo {
+  font-size: 12px;
+  margin-top: 15px;
+  text-align: center;
+  color: #333;
+}
+
+.guest {
+  margin-top: 10px;
+  font-weight: bold;
+  color: #e84a5f;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* .guest:hover {
+  text-decoration: underline;
+} */
+
+
+@media (max-width: 768px) {
+  header {
+    padding: 10px 20px;
+  }
+
+  .logo img {
+    height: 45px;
+  }
+
+  .logo h1 {
+    font-size: 20px;
+  }
+
+  nav {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    background: #fff;
+    position: absolute;
+    top: 70px;
+    left: 0;
+    border-top: 1px solid #ccc;
+    text-align: center;
+    padding: 10px 0;
+  }
+
+  nav.active {
+    display: flex;
+  }
+
+  nav a {
+    padding: 10px 0;
+    display: block;
+    width: 100%;
+  }
+
+  .menu-toggle {
+    display: block;
+    color: #e84a5f;
+  }
+
+  main {
+    padding: 30px 10px;
+  }
+
+  .signin-box {
+    width: 90%;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .logo h1 {
+    font-size: 18px;
+  }
+
+  .signin-box {
+    padding: 20px;
+  }
+
+  .tabs button {
+    padding: 8px 15px;
+    font-size: 14px;
+  }
+
+  .form-button {
+    padding: 8px;
+  }
+}
+  </style>
+  
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <a href="home.html"><img src="../assets/logo.png" alt="Doughlightful Logo" /></a>
+      <h1>DOUGHLIGHTFUL</h1>
+    </div>
+     <nav>
+      <ul class="nav-links">
+        <li><a href="../page/home.html">HOME</a></li>
+        <li><a href="../page/product.html">PRODUCTS</a></li>
+        <li><a href="../page/recipe.html">RECIPES</a></li>
+        <li><a href="../page/about.html">ABOUT US</a></li>
+        <a href="order.html"><i class="fa-solid fa-cart-shopping"></i></a>
+        <a href="../page/profile.html"><i class="fa-solid fa-user"></i></a>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <div class="signin-box">
+      <img src="../assets/logo.png" class="image-logo" alt="Logo"/>
+      <h2>Welcome to Doughlightful</h2>
+
+      <div class="tabs">
+        <button class="active">Sign In</button>
+        <a href="signup.html"><button>Sign Up</button></a>
+      </div>
+
+      <form>
+        <label>Email:</label>
+        <input type="email" placeholder="Enter your email" required />
+
+        <label>Password:</label>
+        <input type="password" placeholder="Enter your password" required />
+
+        <button type="submit" class="form-button">Sign In</button>
+      </form>
+
+     
+      <a href="home.html"><p class="guest">Continue as Guest</p></a>
+    </div>
+  </main>
+</body>
+</html>

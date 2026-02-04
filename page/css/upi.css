@@ -1,0 +1,146 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+/* ===== NAVBAR ===== */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* background: #ff4d88; */
+  padding: 10px 30px;
+  color: black;
+  flex-wrap: wrap;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo-container img {
+  height: 50px;
+}
+
+.logo-container h1 {
+  font-size: 22px;
+  font-weight: bold;
+  margin: 0;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+nav a {
+  text-decoration: none;
+  color:black;
+  /* font-weight: 500; */
+  transition: 0.3s;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+/* ===== PAGE ===== */
+body {
+  background-color: #fff7f7;
+  margin: 0;
+}
+
+/* Container */
+.container {
+  max-width: 420px;
+  background: #ffffff;
+  padding: 25px;
+  border-radius: 20px;
+  box-shadow: 0 6px 20px rgba(255, 77, 136, 0.25);
+  margin: 40px auto;
+  text-align: center;
+}
+
+h1 {
+  font-size: 24px;
+  color: #ff4d88;
+  margin-bottom: 20px;
+}
+
+/* Payment options */
+.payment-box {
+  text-align: left;
+  margin: 20px 0;
+}
+
+.payment-box label {
+  display: block;
+  background: #fff0f4;
+  padding: 12px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  border: 2px solid transparent;
+}
+
+.payment-box label:hover {
+  border-color: #ff4d88;
+}
+
+/* Extra Fields */
+.extra-fields {
+  display: none;
+  margin-top: 15px;
+  text-align: left;
+}
+
+.extra-fields label {
+  font-size: 14px;
+  color: #9c4a6a;
+  margin-bottom: 5px;
+  display: block;
+}
+
+.extra-fields input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  border: 1px solid #ffd1e1;
+}
+
+/* Button */
+.confirm-btn {
+  background-color: #ff4d88;
+  color: white;
+  padding: 12px;
+  border: none;
+  width: 100%;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.confirm-btn:hover {
+  background-color: #e6005c;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  nav {
+    gap: 15px;
+    flex-wrap: wrap;
+  }
+  header {
+    padding: 10px 15px;
+  }
+  .container {
+    margin: 20px 15px;
+  }
+}
