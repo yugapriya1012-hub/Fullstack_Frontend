@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Doughlightful - Orders</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #ffe5e5;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      padding: 15px 30px;
+      background-color: #fff;
+    }
+
+    .brand {
+      font-size: 22px;
+      font-weight: bold;
+      color: #e83e4e;
+    }
+
+    .cart-icon {
+      position: relative;
+      font-size: 20px;
+    }
+
+    #cart-count {
+      position: absolute;
+      top: -8px;
+      right: -10px;
+      background-color: #e83e4e;
+      color: white;
+      font-size: 12px;
+      padding: 2px 6px;
+      border-radius: 50%;
+    }
+
+    main {
+      padding: 30px;
+    }
+
+    .product-card {
+      display: flex;
+      align-items: center;
+      background: #fff;
+      padding: 15px;
+      border-radius: 15px;
+      gap: 20px;
+      max-width: 900px;
+      margin: 20px auto;
+    }
+
+    .product-card img {
+      width: 120px;
+      height: 120px;
+      border-radius: 10px;
+    }
+
+    .details {
+      flex: 1;
+    }
+
+    .details h4 {
+      color: #e83e4e;
+      margin: 5px 0;
+    }
+
+    .price {
+      font-weight: bold;
+    }
+
+    .add-btn {
+      background-color: #f47c88;
+      color: white;
+      padding: 8px 18px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .add-btn:hover {
+      background-color: #d96370;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <span class="brand">DOUGHLIGHTFUL</span>
+
+  <div class="cart-icon">
+    <i class="fa-solid fa-cart-shopping"></i>
+    <span id="cart-count">0</span>
+  </div>
+</header>
+
+<main>
+
+  <!-- PRODUCT 1 -->
+  <div class="product-card">
+    <img src="https://image.makewebeasy.net/makeweb/m_1920x0/rGAbosWut/DefaultData/AGS_0528_min.jpg">
+
+    <div class="details">
+      <h4>BLACK FOREST CAKE</h4>
+      <p>Price: Rs. <span class="unit-price">500</span></p>
+      <p>Total Amount: Rs. <span class="total-price">500</span></p>
+    </div>
+
+    <button class="add-btn">Add +</button>
+  </div>
+
+  <!-- PRODUCT 2 -->
+  <div class="product-card">
+    <img src="https://cruff.in/cdn/shop/files/hearty-red-velvet-cake.webp">
+
+    <div class="details">
+      <h4>RED VELVET CAKE</h4>
+      <p>Price: Rs. <span class="unit-price">1200</span></p>
+      <p>Total Amount: Rs. <span class="total-price">1200</span></p>
+    </div>
+
+    <button class="add-btn">Add +</button>
+  </div>
+
+</main>
+
+<script>
+  let totalCartCount = 0;
+  const cartCountSpan = document.getElementById("cart-count");
+
+  const productCards = document.querySelectorAll(".product-card");
+
+  productCards.forEach(card => {
+    let quantity = 0;
+
+    const addBtn = card.querySelector(".add-btn");
+    const unitPrice = Number(card.querySelector(".unit-price").textContent);
+    const totalPriceSpan = card.querySelector(".total-price");
+
+    addBtn.addEventListener("click", () => {
+      quantity++;
+      totalCartCount++;
+
+      addBtn.textContent = `Add +${quantity}`;
+      totalPriceSpan.textContent = unitPrice * quantity;
+      cartCountSpan.textContent = totalCartCount;
+    });
+  });
+</script>
+
+</body>
+</html>

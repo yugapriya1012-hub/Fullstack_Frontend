@@ -1,66 +1,199 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Browse Products</title>
-  <link rel="stylesheet" href="../page/css/product.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-</head>
-<body>
-  <header class="navbar">
-    <div class="logo">
-      <a href="home.html"><img src="../assets/logo.png" alt="Doughlightful Logo" width="150" height="150"></a>
-      <span>DOUGHLIGHTFUL</span>
-    </div>
-    <nav>
-      <ul class="nav-links">
-        <li><a href="../page/home.html">HOME</a></li>
-        <li><a href="../page/product.html">PRODUCTS</a></li>
-        <li><a href="../page/recipe.html">RECIPES</a></li>
-        <li><a href="../page/about.html">ABOUT US</a></li>
-        <a href="order.html"><i class="fa-solid fa-cart-shopping"></i></a>
-        <a href="../page/profile.html"><i class="fa-solid fa-user"></i></a>
-      </ul>
-    </nav>
-  </header>
-  
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Browse Products</title>
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+/* ---------------- GLOBAL ---------------- */
+body {
+  font-family: sans-serif;
+  margin: 0;
+  background: #ffeef2;
+}
+
+/* ---------------- NAVBAR ---------------- */
+.navbar {
+  background: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 40px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo img {
+  width: 60px;
+}
+
+.logo span {
+  color: #ff5e78;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: black;
+}
+
+/* ---------------- FILTERS ---------------- */
+.browse-section {
+  text-align: center;
+  padding: 20px;
+}
+
+.filters {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.filters input,
+.filters select {
+  padding: 10px;
+  width: 220px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+/* ---------------- PRODUCTS ---------------- */
+.product-section {
+  padding: 20px;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* FIXED */
+  gap: 20px;
+  justify-content: start;
+}
+
+.product-card {
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+.product-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.product-card h3 {
+  margin: 10px 0 5px;
+}
+
+.product-card p {
+  font-size: 14px;
+  color: #555;
+}
+
+.product-card span {
+  font-weight: bold;
+  color: #d60000;
+}
+
+.product-card button {
+  margin-top: auto;
+  background: #ff4d88;
+  color: white;
+  border: none;
+  padding: 8px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* ---------------- RESPONSIVE ---------------- */
+@media (max-width: 1200px) {
+  .product-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 900px) {
+  .product-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 500px) {
+  .product-grid { grid-template-columns: 1fr; }
+}
+
+/* ---------------- FOOTER ---------------- */
+.footer {
+  background: #fff6f2;
+  text-align: center;
+  padding: 20px;
+  margin-top: 30px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<header class="navbar">
+  <div class="logo">
+    <img src="../assets/logo.png" alt="logo">
+    <span>DOUGHLIGHTFUL</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#">HOME</a></li>
+    <li><a href="#">PRODUCTS</a></li>
+    <li><a href="#">RECIPES</a></li>
+    <li><a href="#">ABOUT</a></li>
+    <li><i class="fa-solid fa-cart-shopping"></i></li>
+    <li><i class="fa-solid fa-user"></i></li>
+  </ul>
+</header>
+
+<!-- FILTERS -->
 <section class="browse-section">
   <h2>Browse Products</h2>
-  <p>Discover fresh, homemade treats from talented local bakers</p>
+  <p>Discover fresh homemade treats</p>
 
   <div class="filters">
-    <input type="text" id="searchInput" placeholder="Search products or bakers...">
+    <input type="text" id="searchInput" placeholder="Search products or bakers">
+
     <select id="categoryFilter">
-      <option>All Categories</option>
-      <option>Cakes</option>
-      <option>Brownie</option>
-      <option>Cupcake</option>
-      <option>Chocolate</option>
-      <option>Cream-Bun</option>
+      <option value="all">All Categories</option>
+      <option value="cake">Cake</option>
+      <option value="brownie">Brownie</option>
+      <option value="cupcake">Cupcake</option>
+      <option value="chocolate">Chocolate</option>
     </select>
 
     <select id="locationFilter">
-      <option>All Locations</option>
-      <option>Tondiarpet</option>
-      <option>Washermenpet</option>
-      <option>Adyar</option>
-      <option>Taramani</option>
-      <option>Thiruvanmyiur</option>
+      <option value="all">All Locations</option>
+      <option value="chennai">Chennai</option>
+      <option value="adyar">Adyar</option>
     </select>
-    <label><input type="checkbox" class="box"> Show out of stock</label>
   </div>
+</section>
 
-  
+<!-- PRODUCTS -->
+<section class="product-section">
+  <div class="product-grid">
 
-  <div class="product-section">
-    <h2>Browse Products</h2>
-    <p>Discover fresh, homemade treats from talented local bakers</p>
-
-    <div class="product-grid">
-
-      <div class="product-card" data-category="Cookies" data-location="Chennai">
+    <div class="product-card" data-category="Cookies" data-location="Chennai">
         <img src="https://bakewithshivesh.com/wp-content/uploads/2020/05/151F814A-2749-4978-BA53-3AD2A962C933-scaled.jpg" alt="Cookies">
         <h3>Chocolate Chip Cookies</h3>
         <p>Classic chocolate chip cookies made with vanilla.</p>
@@ -314,72 +447,118 @@
         <button>Add to cart</button>
       </div>
 
-      
+
+    <!-- <div class="product-card" data-category="cake" data-location="chennai">
+      <img src="https://images.unsplash.com/photo-1606983340126-99ab4feaa64a">
+      <h3>Chocolate Cake</h3>
+      <p>Rich layered cake</p>
+      <span>Rs.300</span>
+      <b>By Priya</b>
+      <button>Add to Cart</button>
     </div>
-  </div>
 
-  <footer class="footer">
-  <div class="footer-container">
-    <div class="footer-about">
-      <h2>Doughlightful</h2>
-      <p>Bringing homebakers and dessert lovers together — handmade treats made with love and sweetness!</p>
+    <div class="product-card" data-category="brownie" data-location="adyar">
+      <img src="https://thenovicechefblog.com/wp-content/uploads/2025/01/Brownie-Recipe.jpg">
+      <h3>Brownies</h3>
+      <p>Soft chocolate brownies</p>
+      <span>Rs.500</span>
+      <b>By Nisha</b>
+      <button>Add to Cart</button>
     </div>
 
-    
-
-    <div class="footer-contact">
-      <h3>Contact Us</h3>
-      <p>Email: <a href="mailto:hello@doughlightful.com">doughlightful2026@gmail.com</a></p>
-      <p>Phone: +91 98765 43210</p>
-      <div class="social-icons">
-        <a href="#"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGFKGkE0n-MIDhhhVId5GpfwSz5wcPvTJ_Zw&s" alt="Facebook"></a>
-        <a href="#"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHh9ViF0gZEibWmkpgu83gP87hefJ1j2tDZA&s" alt="Instagram"></a>
-        <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Logo_of_Twitter.svg/1200px-Logo_of_Twitter.svg.png" alt="Twitter"></a>
-      </div>
+    <div class="product-card" data-category="cupcake" data-location="chennai">
+      <img src="https://www.pillsburybaking.com/wp-content/uploads/2022/01/strawberry-cupcakes-1.jpg">
+      <h3>Cupcake</h3>
+      <p>Strawberry cupcake</p>
+      <span>Rs.290</span>
+      <b>By Geetha</b>
+      <button>Add to Cart</button>
     </div>
-  </div>
 
-  <div class="footer-bottom">
-    <p>&copy;2025 Doughlightful. All Rights Reserved.</p>
+    <div class="product-card" data-category="chocolate" data-location="chennai">
+      <img src="https://www.wholefoodbellies.com/wp-content/uploads/2015/11/Homemade-Chocolate_3_650px.jpg">
+      <h3>Homemade Chocolate</h3>
+      <p>Handcrafted chocolate</p>
+      <span>Rs.190</span>
+      <b>By Sneha</b>
+      <button>Add to Cart</button>
+    </div>
+
+    <div class="product-card" data-category="cake" data-location="chennai">
+      <img src="https://images.unsplash.com/photo-1606983340126-99ab4feaa64a">
+      <h3>Chocolate Cake</h3>
+      <p>Rich layered cake</p>
+      <span>Rs.300</span>
+      <b>By Priya</b>
+      <button>Add to Cart</button>
+    </div>
+
+    <div class="product-card" data-category="brownie" data-location="adyar">
+      <img src="https://thenovicechefblog.com/wp-content/uploads/2025/01/Brownie-Recipe.jpg">
+      <h3>Brownies</h3>
+      <p>Soft chocolate brownies</p>
+      <span>Rs.500</span>
+      <b>By Nisha</b>
+      <button>Add to Cart</button>
+    </div>
+
+    <div class="product-card" data-category="cupcake" data-location="chennai">
+      <img src="https://www.pillsburybaking.com/wp-content/uploads/2022/01/strawberry-cupcakes-1.jpg">
+      <h3>Cupcake</h3>
+      <p>Strawberry cupcake</p>
+      <span>Rs.290</span>
+      <b>By Geetha</b>
+      <button>Add to Cart</button>
+    </div>
+
+    <div class="product-card" data-category="chocolate" data-location="chennai">
+      <img src="https://www.wholefoodbellies.com/wp-content/uploads/2015/11/Homemade-Chocolate_3_650px.jpg">
+      <h3>Homemade Chocolate</h3>
+      <p>Handcrafted chocolate</p>
+      <span>Rs.190</span>
+      <b>By Sneha</b>
+      <button>Add to Cart</button>
+    </div> -->
+
   </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <p>&copy; 2025 Doughlightful. All Rights Reserved.</p>
 </footer>
-</body>
+
+<!-- JS -->
 <script>
-  const searchInput = document.getElementById("searchInput");
-  const categoryFilter = document.getElementById("categoryFilter");
-  const locationFilter = document.getElementById("locationFilter");
-  const productCards = document.querySelectorAll(".product-card");
+const searchInput = document.getElementById("searchInput");
+const categoryFilter = document.getElementById("categoryFilter");
+const locationFilter = document.getElementById("locationFilter");
+const cards = document.querySelectorAll(".product-card");
 
-  function filterProducts() {
-    const searchText = searchInput.value.toLowerCase();
-    const selectedCategory = categoryFilter.value;
-    const selectedLocation = locationFilter.value;
+function filterProducts() {
+  const search = searchInput.value.toLowerCase();
+  const category = categoryFilter.value;
+  const location = locationFilter.value;
 
-    productCards.forEach(card => {
-      const title = card.querySelector("h3").innerText.toLowerCase();
-      const baker = card.querySelector("b").innerText.toLowerCase();
-      const category = card.dataset.category;
-      const location = card.dataset.location;
+  cards.forEach(card => {
+    const title = card.querySelector("h3").innerText.toLowerCase();
+    const baker = card.querySelector("b").innerText.toLowerCase();
+    const cardCategory = card.dataset.category;
+    const cardLocation = card.dataset.location;
 
-      const matchesSearch =
-        title.includes(searchText) || baker.includes(searchText);
+    const show =
+      (title.includes(search) || baker.includes(search)) &&
+      (category === "all" || cardCategory === category) &&
+      (location === "all" || cardLocation === location);
 
-      const matchesCategory =
-        selectedCategory === "all" || category === selectedCategory;
+    card.style.display = show ? "flex" : "none";
+  });
+}
 
-      const matchesLocation =
-        selectedLocation === "all" || location === selectedLocation;
-
-      if (matchesSearch && matchesCategory && matchesLocation) {
-        card.style.display = "flex";
-      } else {
-        card.style.display = "none";
-      }
-    });
-  }
-
-  searchInput.addEventListener("input", filterProducts);
-  categoryFilter.addEventListener("change", filterProducts);
-  locationFilter.addEventListener("change", filterProducts);
+searchInput.addEventListener("input", filterProducts);
+categoryFilter.addEventListener("change", filterProducts);
+locationFilter.addEventListener("change", filterProducts);
 </script>
+
+</body>
 </html>
