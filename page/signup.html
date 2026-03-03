@@ -4,66 +4,137 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Doughlightful Sign Up</title>
-  <link rel="stylesheet" href="../page/css/signup.css"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../page/css/signup.css">
 </head>
 <body>
+
   <header>
     <div class="logo">
-      <a href="home.html"><img src="../assets/logo.png" alt="Doughlightful Logo" /></a>
+      <a href="home.html"><img src="../assets/logo.png" alt="Logo" /></a>
       <h1>DOUGHLIGHTFUL</h1>
-    </div>
-     <nav>
-      <ul class="nav-links">
-        <li><a href="../page/home.html">HOME</a></li>
-        <li><a href="../page/product.html">PRODUCTS</a></li>
-        <li><a href="../page/recipe.html">RECIPES</a></li>
-        <li><a href="../page/about.html">ABOUT US</a></li>
-        <a href="order.html"><i class="fa-solid fa-cart-shopping"></i></a>
-        <a href="../page/profile.html"><i class="fa-solid fa-user"></i></a>
-      </ul>
-    </nav>
     </div>
   </header>
 
   <main>
     <div class="signin-box">
-      <img src="../assets/logo.png" class="image-logo" alt="Logo"/>
-      <h2>Welcome to Doughlightful</h2>
-
-      <div class="tabs">
-        <button class="active">sign up</button>
-        <a href="signin.html"><button>sign in</button></a> 
+      <h2 id="formTitle">Customer Sign Up</h2>
+      <p class="subtitle">Welcome to the Doughlightful community</p>
+      
+      <div class="toggle-container" id="roleToggle">
+        <div id="customerTab" class="active-text">Customer</div>
+        <div id="bakerTab">Baker</div>
+        <span class="slider"></span>
       </div>
 
-      <form>
-        <label>Name:</label>
-        <input type="text" placeholder="Enter your name" required />
+      <form id="signupForm">
+        <input type="hidden" id="userRole" name="role" value="customer">
 
-        <label>Email:</label>
-        <input type="email" placeholder="Enter your email" required />
+        <label>Full Name</label>
+        <input type="text" id="fullName" placeholder="Enter your name" required />
 
-        <label>Password:</label>
-        <input type="password" placeholder="Enter your password" required />
+        <label>Email</label>
+        <input type="email" id="email" placeholder="Enter your valid email" required />
 
-        <label>Confirm Password:</label>
-        <input type="password" placeholder="Confirm your password" required />
+        <label>Phone Number</label>
+        <input type="tel" id="phoneNumber" placeholder="Enter phone number" required />
 
-        <label>Phone no:</label>
-        <input type="number" placeholder="Enter your Phone no. " required />
+        <label>Password</label>
+        <input type="password" id="password" placeholder="Enter your password" required />
+        
+        <label>Confirm Password</label>
+        <input type="password" id="confirmPassword" placeholder="Confirm your password" required />
 
-        <p class="end">I want to join as:</p>
-        <div class="tabs">
-          <a href="../page/home.html"><button type="button" class="active">Customer</button></a>
-          <a href="../page/seller/seller_home.html"><button type="button">Baker</button></a>
-        </div>
-
-        <button type="submit" class="form-button">Create Account</button>
+        <button type="submit" class="form-button" id="submitBtn">Create Customer Account</button>
       </form>
 
-      <a href="home.html"><p class="guest">Continue as guest</p></a>
+      <a href="home.html" class="guest">Continue as guest</a>
+      <p>Already have an account? <a href="../page/signin.html" class="switch-link"><b>Sign In</b></a></p>
     </div>
   </main>
 
+  <script>
+    
+    const roleToggle = document.getElementById('roleToggle');
+    const customerTab = document.getElementById('customerTab');
+    const bakerTab = document.getElementById('bakerTab');
+    const formTitle = document.getElementById('formTitle');
+    const submitBtn = document.getElementById('submitBtn');
+    const userRoleInput = document.getElementById('userRole');
+    const signupForm = document.getElementById('signupForm');
+
+   
+    roleToggle.addEventListener('click', () => {
+        roleToggle.classList.toggle('baker-active');
+        const isBaker = roleToggle.classList.contains('baker-active');
+
+        if (isBaker) {
+            userRoleInput.value = "baker";
+            formTitle.innerText = "Baker Sign Up";
+            submitBtn.innerText = "Create Baker Account";
+            customerTab.classList.remove('active-text');
+            bakerTab.classList.add('active-text');
+        } else {
+            userRoleInput.value = "customer";
+            formTitle.innerText = "Customer Sign Up";
+            submitBtn.innerText = "Create Customer Account";
+            bakerTab.classList.remove('active-text');
+            customerTab.classList.add('active-text');
+        }
+    });
+
+  
+    signupForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+ 
+        const name = document.getElementById('fullName').value;
+        const email = document.getElementById('email').value;
+        const phone = document.getElementById('phoneNumber').value;
+        const password = document.getElementById('password').value;
+        const confirmPassword = document.getElementById('confirmPassword').value;
+
+       
+        if (password !== confirmPassword) {
+            alert("Passwords do not match! Please try again.");
+            return;
+        }
+
+        
+        const role = userRoleInput.value;
+        const url = role === "customer" 
+            ? "http://127.0.0.1:8000/customers/" 
+            : "http://127.0.0.1:8000/seller/signup";
+
+        const payload = {
+            name: name,
+            email: email,
+            password: password,
+            phone: phone
+        };
+
+        try {
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload)
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+                alert(result.message || "Registration Successful!");
+                window.location.href = "../page/signin.html";
+            } else {
+                
+                alert("Error: " + (result.detail || "Signup failed"));
+            }
+        } catch (error) {
+            console.error("Connection Error:", error);
+            alert("Cannot connect to server. Ensure FastAPI is running and CORS is enabled.");
+        }
+    });
+  </script>
 </body>
 </html>

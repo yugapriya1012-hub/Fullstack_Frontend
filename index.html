@@ -6,7 +6,6 @@
   <title>Doughlightful | Home</title>
   <link rel="stylesheet" href="page/css/index.css"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  
 </head>
 <body>
   
@@ -18,15 +17,14 @@
 
      <nav>
       <ul class="nav-links">
-        <li><a href="../page/home.html">HOME</a></li>
-        <li><a href="../page/product.html">PRODUCTS</a></li>
-        <li><a href="../page/recipe.html">RECIPES</a></li>
-        <li><a href="../page/about.html">ABOUT US</a></li>
+        <li><a href="index.html" class="nav-link">HOME</a></li>
+        <li><a href="page/product.html" class="nav-link">PRODUCTS</a></li>
+        <li><a href="page/recipe.html" class="nav-link">RECIPES</a></li>
+        <li><a href="page/about.html" class="nav-link">ABOUT US</a></li>
       </ul>
     </nav>
-
-    
   </header>
+  
   <section class="hero">
     <div class="hero-text">
       <h1>WELCOME TO <br><span>DOUGHLIGHTFUL</span></h1>
@@ -36,8 +34,7 @@
       </div>
       <p>
         Discover the joy of homemade bakery treats crafted with love by talented
-        home bakers in your community. Every bite tells a story of passion,
-        tradition, and delightful flavors.
+        home bakers in your community.
       </p>
     </div>
 
@@ -45,5 +42,33 @@
       <img src="https://i.pinimg.com/1200x/35/b4/d8/35b4d8ce2640a9e7cf0d29672358a89c.jpg" alt="Delightful Cake" />
     </div>
   </section>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const navLinks = document.querySelectorAll('.nav-link');
+        
+        // 1. Function to check if user is logged in
+        function checkLoginStatus() {
+            // For now, check if a 'user' token exists in localStorage
+            return localStorage.getItem('user_token') !== null;
+        }
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                // 2. If trying to go to 'About Us', allow it
+                if (link.getAttribute('href').includes('about.html')) {
+                    return; 
+                }
+
+                // 3. For other pages, check login
+                if (!checkLoginStatus()) {
+                    e.preventDefault(); // Stop navigation
+                    alert("Please log in first to view this page.");
+                    window.location.href = "page/signin.html"; // Redirect to login
+                }
+            });
+        });
+    });
+  </script>
 </body>
 </html>

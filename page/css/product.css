@@ -2,7 +2,7 @@
   font-family: sans-serif;
   margin: 0;
   padding: 0;
-  background: #ffeef2; 
+  background-color: #ffecec;
   /* background: linear-gradient(to right, #ff7a59, #ffb199); */
 }
 .navbar{
@@ -97,6 +97,7 @@ h2 {
   text-align:left;
   height: 100%;
   box-sizing: border-box;
+  transition: opacity 0.3s ease, transform 0.3s ease;
   
 }
 
@@ -137,6 +138,19 @@ h2 {
   margin-top: 10px;
 }
 
+
+
+.product-card.out-of-stock {
+    opacity: 0.5;
+    filter: grayscale(1);
+    pointer-events: none;
+}
+.product-card.out-of-stock::after {
+    content: "OUT OF STOCK";
+    color: red;
+    font-weight: bold;
+    text-align: center;
+}
 
 .footer {
   background-color: #fff6f2;

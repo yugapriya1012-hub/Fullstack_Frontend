@@ -1,7 +1,7 @@
  body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background-color: #ffe5e5;
+   background-color: #ffecec;
 }
 
 /* Header */
@@ -141,7 +141,8 @@ main {
 }
 
 .actions button {
-  background-color: #f47c88;
+  /* background-color: #f47c88; */
+  background-color: #ff4d88;
   color: white;
   padding: 8px 15px;
   border: none;

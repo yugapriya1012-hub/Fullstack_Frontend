@@ -3,53 +3,113 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Doughlightful Sign In</title>
-  <link rel="stylesheet" href="../page/css/signin.css"/>
+  <title>Doughlightful - Sign In</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
- 
-  
+  <link rel="stylesheet" href="../page/css/signin.css">
+  <style>
+    /* Ensure the toggle looks good if it's not in your CSS yet */
+    .toggle-container {
+      position: relative; display: flex; background: #f0f0f0;
+      height: 40px; border-radius: 20px; margin: 20px 0; cursor: pointer;
+      border: 1px solid #ddd;
+    }
+    .toggle-container div { flex: 1; text-align: center; line-height: 40px; z-index: 2; font-weight: bold; color: #888; transition: 0.3s; }
+    .toggle-container div.active-text { color: #fff; }
+    .slider {
+      position: absolute; left: 0; top: 0; height: 100%; width: 50%;
+      background: #e84a5f; border-radius: 20px; transition: 0.3s ease; z-index: 1;
+    }
+    .toggle-container.baker-active .slider { left: 50%; }
+  </style>
 </head>
 <body>
-  <header>
-    <div class="logo">
-      <a href="home.html"><img src="../assets/logo.png" alt="Doughlightful Logo" /></a>
-      <h1>DOUGHLIGHTFUL</h1>
+
+<header>
+  <div class="logo">
+    <a href="home.html"><img src="../assets/logo.png" alt="Logo"></a>
+    <h1>DOUGHLIGHTFUL</h1>
+  </div>
+</header>
+
+<main>
+  <div class="auth-box">
+    <h2 id="formTitle">Customer Sign In</h2>
+    <p class="subtitle">Welcome back to the community</p>
+
+    <div class="toggle-container" id="roleToggle">
+      <div id="customerTab" class="active-text">Customer</div>
+      <div id="bakerTab">Baker</div>
+      <span class="slider"></span>
     </div>
-     <nav>
-      <ul class="nav-links">
-        <li><a href="../page/home.html">HOME</a></li>
-        <li><a href="../page/product.html">PRODUCTS</a></li>
-        <li><a href="../page/recipe.html">RECIPES</a></li>
-        <li><a href="../page/about.html">ABOUT US</a></li>
-        <a href="order.html"><i class="fa-solid fa-cart-shopping"></i></a>
-        <a href="../page/profile.html"><i class="fa-solid fa-user"></i></a>
-      </ul>
-    </nav>
-  </header>
 
-  <main>
-    <div class="signin-box">
-      <img src="../assets/logo.png" class="image-logo" alt="Logo"/>
-      <h2>Welcome to Doughlightful</h2>
+    <form id="signinForm">
+      <input type="hidden" id="userRole" value="customer">
 
-      <div class="tabs">
-        <button class="active">sign in</button>
-        <a href="signup.html"><button>sign up</button></a>
-      </div>
+      <label>Email Address</label>
+      <input type="email" id="email" placeholder="Enter your email" required>
 
-      <form>
-        <label>Email:</label>
-        <input type="email" placeholder="Enter your email" required />
+      <label>Password</label>
+      <input type="password" id="password" placeholder="Enter your password" required>
 
-        <label>Password:</label>
-        <input type="password" placeholder="Enter your password" required />
+      <button type="submit" class="btn" id="submitBtn">Sign In</button>
+    </form>
 
-      <button type="submit" class="form-button">Sign In</button>
-      </form>
+    <p class="footer-text">Don't have an account? <a href="../page/signup.html"><b>Sign Up</b></a></p>
+  </div>
+</main>
 
-     
-      <a href="home.html"><p class="guest">Continue as Guest</p></a>
-    </div>
-  </main>
+<script>
+  const roleToggle = document.getElementById('roleToggle');
+  const userRoleInput = document.getElementById('userRole');
+  const formTitle = document.getElementById('formTitle');
+  const customerTab = document.getElementById('customerTab');
+  const bakerTab = document.getElementById('bakerTab');
+
+ 
+  roleToggle.addEventListener('click', () => {
+    roleToggle.classList.toggle('baker-active');
+    const isBaker = roleToggle.classList.contains('baker-active');
+    
+    userRoleInput.value = isBaker ? "baker" : "customer";
+    formTitle.innerText = isBaker ? "Baker Sign In" : "Customer Sign In";
+    
+    customerTab.classList.toggle('active-text', !isBaker);
+    bakerTab.classList.toggle('active-text', isBaker);
+  });
+
+  
+  document.getElementById('signinForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const role = userRoleInput.value;
+
+   
+    const url = role === "customer" 
+      ? "http://127.0.0.1:8000/customers/login" 
+      : "http://127.0.0.1:8000/seller/login";
+
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password })
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        alert("Login Successful!");
+       
+        window.location.href = role === "customer" ? "../page/home.html" : "../page/seller/seller_home.html";
+      } else {
+        alert("Error: " + (data.detail || "Invalid Credentials"));
+      }
+    } catch (err) {
+      alert("Server is offline. Check FastAPI.");
+    }
+  });
+</script>
 </body>
 </html>

@@ -8,8 +8,6 @@
 <body>
 
 <div class="container">
-
-    <!-- Vertical Navbar -->
     <div class="sidebar">
         <h1>Doughlightful</h1>
         <a href="dashboard.html">Dashboard</a>
@@ -18,39 +16,74 @@
         <a href="logout.html">Sign Out</a>
     </div>
 
-    <!-- Main Content -->
     <div class="content">
         <div class="content-box">
             <h2>Add Product</h2>
 
-            <form class="product-form">
+            <form id="productForm" class="product-form">
                 <label>Seller Name</label>
-                <input type="text" placeholder="Enter your name">
+                <input type="text" id="sellerId" placeholder="Enter seller Name" required>
 
                 <label>Product Name</label>
-                <input type="text" placeholder="Enter Product name">
+                <input type="text" id="productName" placeholder="Enter Product name" required>
 
-                <label>Product Images</label>
-                <input type="file" multiple>
+                <label>Product Image</label>
+                <input type="file" id="productImage" accept="image/*" required>
 
                 <label>Description</label>
-                <textarea name="" id=""></textarea>
+                <textarea id="description" required></textarea>
 
                 <label>Price</label>
-                <input type="number" placeholder="Enter your price">
+                <input type="number" id="price" placeholder="Enter price" required>
 
                 <label>Places</label>
-                <input type="text" placeholder="Enter your Places">
+                <input type="text" id="places" placeholder="Enter Location" required>
 
                 <label>Discount (%)</label>
-                <input type="number" placeholder="Enter your Discount">
+                <input type="number" id="discount" placeholder="Enter Discount" required>
 
-                <a href="../seller/productsucc.html"><button type="button" class="active">Add Product</button></a>
+                <button type="submit" class="active">Add Product</button>
             </form>
         </div>
     </div>
-  
 </div>
-
 </body>
+<script>
+document.getElementById('productForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    // 1. Capture Form Data
+    const formData = new FormData();
+    // Keys ('seller_name', etc.) must match the Form(...) names in FastAPI
+    formData.append('seller_name', document.getElementById('sellerId').value);
+    formData.append('product_name', document.getElementById('productName').value);
+    formData.append('description', document.getElementById('description').value);
+    formData.append('price', document.getElementById('price').value);
+    formData.append('places', document.getElementById('places').value);
+    formData.append('discount', document.getElementById('discount').value);
+    formData.append('image', document.getElementById('productImage').files[0]);
+
+    try {
+        // 2. Send Data to FastAPI Backend
+        const response = await fetch('http://127.0.0.1:8000/products/', {
+            method: 'POST',
+            body: formData 
+        });
+
+        // 3. Handle Response
+        if (response.ok) {
+            // PRO APPROACH: No alert needed here, the redirect is enough.
+            window.location.href = "../seller/productsucc.html";
+        } else {
+            // Friendly error message for user
+            const errorData = await response.json();
+            alert("Could not add product: " + (errorData.detail || "Please check your details and try again."));
+        }
+    } catch (error) {
+        console.error("Error:", error);
+        // Friendly connection error
+        alert("We are having trouble connecting to our server. Please check your internet connection.");
+    }
+});
+</script>
 </html>

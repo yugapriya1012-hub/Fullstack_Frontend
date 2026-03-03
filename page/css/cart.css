@@ -1,0 +1,226 @@
+body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #ffecec; 
+        }
+
+       
+        header {
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+            padding: 15px 5%; 
+            background: #fff; 
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .logo-section { 
+            display: flex; 
+            align-items: center; 
+            gap: 10px; 
+        }
+        .logo-section img { 
+            width: 50px; }
+        .brand { 
+            font-weight: bold; 
+            font-size: 1.5rem; 
+            color: #ff4d88; 
+        }
+        
+        nav .nav-links { 
+            list-style: none; 
+            display: flex; 
+            gap: 20px; 
+            align-items: center; 
+            margin: 0; 
+            padding: 0; 
+        }
+        nav .nav-links li a { 
+            text-decoration: none; 
+            color: #333; 
+            font-weight: 500; 
+        }
+        nav .nav-links i { 
+            color: #333; 
+            font-size: 1.2rem; 
+            cursor: pointer; 
+        }
+
+      
+        main { 
+            max-width: 800px; 
+            margin: 30px auto; 
+            padding: 20px; 
+        }
+        .cart-title { 
+            text-align: center; 
+            color: #212121; 
+            margin-bottom: 20px; 
+        }
+
+      
+        .product-card {
+            display: flex; 
+            align-items: center; 
+            padding: 20px;
+            background: #fff; 
+            border-bottom: 1px solid #f0f0f0;
+            margin-bottom: 15px; 
+            border-radius: 8px; 
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .product-card img { 
+            width: 100px; 
+            height: 100px; 
+            object-fit: cover; 
+            border-radius: 5px; 
+        }
+        .details { 
+            flex-grow: 1; 
+            margin-left: 20px; 
+        }
+        .details h4 { 
+            margin: 0; 
+            font-size: 1.1rem; 
+            text-transform: uppercase; 
+        }
+        .details .price-tag { 
+            margin: 10px 0; 
+            font-weight: bold; 
+            font-size: 1rem; 
+            color: #212121;
+        }
+
+      
+        .quantity-controls { 
+            display: flex; 
+            align-items: center; 
+            gap: 12px; 
+            margin: 10px 0; 
+        }
+        .qty-btn {
+            background-color: #ff4d88; /* Brand Pink */
+            color: white; 
+            border: none; 
+            width: 30px; 
+            height: 30px; 
+            cursor: pointer; 
+            border-radius: 50%; 
+            font-size: 18px; 
+            font-weight: bold; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            transition: 0.3s;
+        }
+        .qty-btn:hover { 
+            background-color: #e63977; 
+        }
+
+        .item-count { 
+            font-weight: bold; 
+            font-size: 1.1rem; 
+            min-width: 20px; 
+            text-align: center; 
+        }
+
+        .remove-item { 
+            color: #ee5253; 
+            cursor: pointer; 
+            font-size: 0.85rem; 
+            border: none; 
+            background: none; 
+            margin-top: 10px; 
+            padding: 0; 
+            font-weight: bold; 
+            text-transform: uppercase;
+        }
+        .remove-item:hover { 
+            text-decoration: underline; 
+        }
+
+        
+        .order-summary-container {
+            background: #fdfdfd; 
+            padding: 25px; 
+            border: 1px solid #eee; 
+            border-radius: 8px; 
+            margin-top: 30px; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .summary-header { 
+            margin-top: 0; 
+            color: #878787; 
+            font-size: 1rem; 
+            text-transform: uppercase; 
+        }
+        .summary-row { 
+            display: flex; 
+            justify-content: space-between; 
+            margin-bottom: 10px; 
+            font-size: 1rem; 
+        }
+        .summary-row.total { 
+            border-top: 2px solid #333; 
+            padding-top: 10px; 
+            margin-top: 10px; 
+            font-weight: bold; 
+            font-size: 1.2rem; 
+        }
+
+      
+        .date-highlight { 
+            background: #fff; 
+            padding: 15px; 
+            border-radius: 5px; 
+            border: 1px solid #e0e0e0; 
+            margin: 15px 0; 
+        }
+        .delivery-label { 
+            font-weight: bold; 
+            color: #212121; 
+            display: flex; 
+            align-items: center; 
+            gap: 8px; 
+        }
+        .date-input-style {
+            padding: 12px; 
+            width: 100%; 
+            box-sizing: border-box; 
+            border-radius: 4px; 
+            border: 2px solid #ff4d88; 
+            margin-top: 8px; 
+            font-family: inherit; 
+            font-size: 1rem; 
+            outline: none;
+        }
+        #dayDisplay { 
+            color:#ff4d88; 
+            font-weight: bold; 
+            margin-top: 10px; 
+            font-size: 0.9rem; 
+        }
+
+       
+        .checkout-btn {
+            width: 100%; 
+            padding: 15px; 
+            background:#ff4d88; 
+            color: white; 
+            border: none; 
+            border-radius: 5px; 
+            font-size: 1.1rem; 
+            font-weight: bold; 
+            cursor: pointer; 
+            margin-top: 20px; 
+            text-transform: uppercase; 
+            transition: 0.3s;
+        }
+        .checkout-btn:hover { 
+            background: #e63977; 
+            transform: translateY(-2px); 
+        }
+
+        #emptyCartMsg { 
+            text-align: center; 
+            padding: 100px 20px; 
+            display: none; }

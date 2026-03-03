@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Doughlightful - Orders</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="../page/css/cart.css">
+</head>
+<body>
+
+<header>
+    <div class="logo-section">
+        <a href="home.html"><img src="../assets/logo.png" alt="Doughlightful Logo" /></a>
+        <span class="brand">DOUGHLIGHTFUL</span>
+    </div>
+    <nav>
+        <ul class="nav-links">
+            <li><a href="../page/home.html">HOME</a></li>
+            <li><a href="../page/product.html">PRODUCTS</a></li>
+            <li><a href="../page/recipe.html">RECIPES</a></li>
+            <li><a href="../page/about.html">ABOUT US</a></li>
+            <a href="order.html"><i class="fa-solid fa-cart-shopping"></i></a>
+            <a href="../page/profile.html"><i class="fa-solid fa-user"></i></a>
+        </ul>
+    </nav>
+</header>
+
+<main id="cartMain">
+    <h2 class="cart-title">MY CART</h2>
+    
+    <div id="emptyCartMsg">
+        <i class="fa-solid fa-basket-shopping" style="font-size: 4rem; color: #ddd; margin-bottom: 20px;"></i>
+        <h3>Your cart is empty!</h3>
+        <p><a href="product.html" style="color: #ff4d88; text-decoration: none; font-weight: bold;">Shop Now</a></p>
+    </div>
+
+    <div id="cartItemsContainer"></div>
+
+    <div class="order-summary-container" id="cartSummary">
+        <h3 class="summary-header">Price Details</h3>
+        <div class="summary-row">
+            <span>Price (Items)</span>
+            <span>Rs. <span id="subtotalAmount">0</span></span>
+        </div>
+        <div class="summary-row">
+            <span>Delivery Charges</span>
+            <span>Rs. 50</span>
+        </div>
+        <div class="date-highlight">
+            <span class="delivery-label">
+                <i class="fa-solid fa-truck-fast" style="color:#ff4d88 ;"></i> Select Delivery Date
+            </span>
+            <input type="date" id="deliveryDateInput" class="date-input-style">
+            <p id="dayDisplay"></p>
+        </div>
+        <div class="summary-row total">
+            <span>Total Amount</span>
+            <span>Rs. <span id="grandTotal">0</span></span>
+        </div>
+        <button class="checkout-btn" onclick="proceedToPayment()">Place Order</button>
+    </div>
+</main>
+
+<script>
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+function setupFlipkartDateMethod() {
+    const dateInput = document.getElementById('deliveryDateInput');
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1); 
+    const yyyy = tomorrow.getFullYear();
+    const mm = String(tomorrow.getMonth() + 1).padStart(2, '0');
+    const dd = String(tomorrow.getDate()).padStart(2, '0');
+    const minDateValue = `${yyyy}-${mm}-${dd}`;
+    dateInput.setAttribute('min', minDateValue);
+    dateInput.value = minDateValue;
+    updateDayLabel(minDateValue);
+}
+
+function updateDayLabel(dateValue) {
+    const selectedDate = new Date(dateValue);
+    const dayDisplay = document.getElementById('dayDisplay');
+    if (!isNaN(selectedDate)) {
+        const options = { weekday: 'long', day: 'numeric', month: 'long' };
+        dayDisplay.innerHTML = `<i class="fa-regular fa-calendar-check"></i> Delivery by ${selectedDate.toLocaleDateString('en-IN', options)}`;
+    }
+}
+
+document.getElementById('deliveryDateInput').addEventListener('change', function() {
+    updateDayLabel(this.value);
+});
+
+function updateCart() {
+    localStorage.setItem('cart', JSON.stringify(cart));
+    renderCart();
+}
+
+function changeQuantity(productId, delta) {
+    const item = cart.find(i => i.id === productId);
+    if (item) {
+        item.quantity += delta;
+        if (item.quantity < 1) {
+            removeItem(productId);
+        } else {
+            updateCart();
+        }
+    }
+}
+
+function removeItem(productId) {
+    cart = cart.filter(item => item.id !== productId);
+    updateCart();
+}
+
+function renderCart() {
+    const container = document.getElementById('cartItemsContainer');
+    const subtotalSpan = document.getElementById('subtotalAmount');
+    const grandTotalSpan = document.getElementById('grandTotal');
+    const emptyMsg = document.getElementById('emptyCartMsg');
+    const summary = document.getElementById('cartSummary');
+    
+    container.innerHTML = '';
+    let subtotal = 0;
+    const deliveryFee = 50;
+
+    if (cart.length === 0) {
+        emptyMsg.style.display = 'block';
+        summary.style.display = 'none';
+        return;
+    }
+
+    emptyMsg.style.display = 'none';
+    summary.style.display = 'block';
+
+    cart.forEach(item => {
+        const itemTotal = item.price * item.quantity;
+        subtotal += itemTotal;
+
+        const card = document.createElement('div');
+        card.className = 'product-card';
+
+        card.innerHTML = `
+            <img src="${item.image}" alt="${item.name}" />
+            <div class="details">
+                <h4>${item.name}</h4>
+                <p class="price-tag">Rs. ${item.price}</p>
+                <button class="remove-item" onclick="removeItem(${item.id})">Remove</button>
+            </div>
+            <div class="actions" style="text-align: right;">
+                <div class="quantity-controls">
+                    <button class="qty-btn" onclick="changeQuantity(${item.id}, -1)">-</button>
+                    <span class="item-count">${item.quantity}</span>
+                    <button class="qty-btn" onclick="changeQuantity(${item.id}, 1)">+</button>
+                </div>
+                <p style="margin-top: 10px; font-size: 0.9rem;">Subtotal: <strong>Rs. ${itemTotal.toFixed(2)}</strong></p>
+            </div>
+        `;
+        container.appendChild(card);
+    });
+
+    subtotalSpan.innerText = subtotal.toFixed(2);
+    grandTotalSpan.innerText = (subtotal + deliveryFee).toFixed(2);
+}
+
+function proceedToPayment() {
+    const dateValue = document.getElementById('deliveryDateInput').value;
+    if (!dateValue) {
+        alert("Please select a delivery date!");
+        return;
+    }
+    localStorage.setItem('selectedDeliveryDate', dateValue);
+    window.location.href = "../page/upi.html";
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    renderCart();
+    setupFlipkartDateMethod();
+});
+</script>
+</body>
+</html>

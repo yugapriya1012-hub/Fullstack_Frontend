@@ -345,41 +345,51 @@
 </footer>
 </body>
 <script>
-  const searchInput = document.getElementById("searchInput");
-  const categoryFilter = document.getElementById("categoryFilter");
-  const locationFilter = document.getElementById("locationFilter");
-  const productCards = document.querySelectorAll(".product-card");
+document.addEventListener('DOMContentLoaded', () => {
+    const searchInput = document.getElementById('searchInput');
+    const categoryFilter = document.getElementById('categoryFilter');
+    const locationFilter = document.getElementById('locationFilter');
+    const stockFilter = document.getElementById('stockFilter');
+    const productCards = document.querySelectorAll('.product-card');
 
-  function filterProducts() {
-    const searchText = searchInput.value.toLowerCase();
-    const selectedCategory = categoryFilter.value;
-    const selectedLocation = locationFilter.value;
+    function filterProducts() {
+        const searchTerm = searchInput.value.toLowerCase();
+        const selectedCategory = categoryFilter.value.toLowerCase();
+        const selectedLocation = locationFilter.value.toLowerCase();
+        const showOutOfStock = stockFilter.checked;
 
-    productCards.forEach(card => {
-      const title = card.querySelector("h3").innerText.toLowerCase();
-      const baker = card.querySelector("b").innerText.toLowerCase();
-      const category = card.dataset.category;
-      const location = card.dataset.location;
+        productCards.forEach(card => {
+            // Get data from the card
+            const title = card.querySelector('h3').innerText.toLowerCase();
+            const baker = card.querySelector('b').innerText.toLowerCase();
+            const category = card.getAttribute('data-category').toLowerCase();
+            const location = card.getAttribute('data-location').toLowerCase();
+            
+            // Logic for "Out of Stock" 
+            // (Since we don't have a data-stock attribute, let's assume all are 'in stock' 
+            // unless we add a specific class or attribute later)
+            const isOutOfStock = card.classList.contains('out-of-stock');
 
-      const matchesSearch =
-        title.includes(searchText) || baker.includes(searchText);
+            // Filtering Conditions
+            const matchesSearch = title.includes(searchTerm) || baker.includes(searchTerm);
+            const matchesCategory = selectedCategory === 'all categories' || category.includes(selectedCategory);
+            const matchesLocation = selectedLocation === 'all locations' || location.includes(selectedLocation);
+            const matchesStock = showOutOfStock ? true : !isOutOfStock;
 
-      const matchesCategory =
-        selectedCategory === "all" || category === selectedCategory;
+            // Show or Hide based on combined results
+            if (matchesSearch && matchesCategory && matchesLocation && matchesStock) {
+                card.style.display = 'flex';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
 
-      const matchesLocation =
-        selectedLocation === "all" || location === selectedLocation;
-
-      if (matchesSearch && matchesCategory && matchesLocation) {
-        card.style.display = "flex";
-      } else {
-        card.style.display = "none";
-      }
-    });
-  }
-
-  searchInput.addEventListener("input", filterProducts);
-  categoryFilter.addEventListener("change", filterProducts);
-  locationFilter.addEventListener("change", filterProducts);
+    // Add Event Listeners
+    searchInput.addEventListener('input', filterProducts);
+    categoryFilter.addEventListener('change', filterProducts);
+    locationFilter.addEventListener('change', filterProducts);
+    stockFilter.addEventListener('change', filterProducts);
+});
 </script>
 </html>
