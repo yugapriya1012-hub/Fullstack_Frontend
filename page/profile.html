@@ -1,52 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Profile Page</title>
-  <link rel="stylesheet" href="../page/css/profile.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doughlightful - Profile</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        body { 
+            margin: 0; 
+            font-family: 'Segoe UI', sans-serif; 
+            background-color: #ffecec; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            min-height: 100vh; 
+        }
+
+        .box { 
+            background: white; 
+            width: 90%; 
+            max-width: 400px; 
+            padding: 40px; 
+            border-radius: 20px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1); 
+            text-align: center; 
+            box-sizing: border-box; 
+        }
+
+        h3 { color: #ff4d88; margin-top: 0; text-transform: uppercase; }
+
+       
+        #displayImg { 
+            width: 130px; 
+            height: 130px; 
+            border-radius: 50%; 
+            object-fit: cover; 
+            border: 5px solid #ff4d88; 
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        .info-group { text-align: left; margin-bottom: 15px; border-bottom: 1px solid #fff0f0; padding-bottom: 10px; }
+        .label { font-size: 0.8rem; color: #ff4d88; font-weight: bold; text-transform: uppercase; }
+        .value { font-size: 1.1rem; color: #333; margin-top: 5px; }
+
+        .edit-btn { 
+            width: 100%; 
+            padding: 12px; 
+            background: #ff4d88; 
+            color: white; 
+            border: none; 
+            border-radius: 8px; 
+            font-weight: bold; 
+            cursor: pointer; 
+            margin-top: 20px; 
+            transition: 0.3s; 
+        }
+        .edit-btn:hover { background: #e63977; transform: translateY(-2px); }
+    </style>
 </head>
 <body>
 
 <div class="box">
-  <h3 style="text-align:center">My Profile</h3>
+    <h3>My Profile</h3>
+    <img id="displayImg" src="pro.jpg" alt="Profile">
+    
+    <div class="info-group">
+        <div class="label">Full Name</div>
+        <div class="value" id="displayName">Guest User</div>
+    </div>
 
-  
-  <img id="profileImg" src="profile.jpg" alt="Profile Image">
-  <input type="file" accept="image/*" onchange="previewImage(event)">
+    <div class="info-group">
+        <div class="label">Email Address</div>
+        <div class="value" id="displayEmail">Not set</div>
+    </div>
 
-  <label>Name</label>
-  <input type="text" placeholder="Enter your name">
+    <div class="info-group">
+        <div class="label">Bio</div>
+        <div class="value" id="displayBio">No bio added yet.</div>
+    </div>
 
-  <label>Email</label>
-  <input type="email" placeholder="Enter your email">
-
-  <label>Date of Birth</label>
-  <input type="date">
-
-  <label>Bio</label>
-  <textarea placeholder="Write something about yourself"></textarea>
-
- 
-  <div class="btns">
-    <button class="edit" onclick="goEdit()">Edit</button>
-    <button class="save" onclick="saveProfile()">Save</button>
-  </div>
+    <button class="edit-btn" onclick="location.href='edit.html'">
+        <i class="fa-solid fa-pen-to-square"></i> Edit Profile
+    </button>
+    <a href="../page/home.html">back to home</a>
 </div>
 
 <script>
-  function goEdit() {
-    window.location.href = "edit.html";
-  }
+    window.onload = function() {
+        const name = localStorage.getItem('pName') || "Guest User";
+        const email = localStorage.getItem('pEmail') || "Not set";
+        const bio = localStorage.getItem('pBio') || "No bio added yet.";
+        const img = localStorage.getItem('pImg') || "pro.jpg";
 
-  function saveProfile() {
-    alert("Profile saved successfully");
-  }
-
-  function previewImage(event) {
-    document.getElementById("profileImg").src =
-      URL.createObjectURL(event.target.files[0]);
-  }
+        document.getElementById('displayName').innerText = name;
+        document.getElementById('displayEmail').innerText = email;
+        document.getElementById('displayBio').innerText = bio;
+        document.getElementById('displayImg').src = img;
+    };
 </script>
-
 </body>
 </html>

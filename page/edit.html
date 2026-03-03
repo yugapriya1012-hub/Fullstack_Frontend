@@ -1,44 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Edit Profile</title>
-  <link rel="stylesheet" href="../page/css/edit.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile</title>
+    <style>
+        body { margin: 0; font-family: 'Segoe UI', sans-serif; background-color: #ffecec; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+        .box { background: white; width: 100%; max-width: 400px; padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        h3 { color: #ff9f43; text-align: center; }
+        label { display: block; margin-top: 15px; font-weight: bold; font-size: 0.9rem; }
+        input, textarea { width: 100%; padding: 10px; margin-top: 5px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; }
+        .save-btn { width: 100%; padding: 12px; background: #ff9f43; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; margin-top: 20px; }
+        #previewImg { width: 80px; height: 80px; border-radius: 50%; display: block; margin: 10px auto; object-fit: cover; border: 2px solid #ff9f43; }
+    </style>
 </head>
 <body>
 
 <div class="box">
-  <h3 style="text-align:center">Edit Profile</h3>
+    <h3>Edit Information</h3>
+    
+    <img id="previewImg" src="profile.jpg">
+    <input type="file" accept="image/*" onchange="updatePreview(event)">
 
+    <label>Name</label>
+    <input type="text" id="editName">
 
-  <img id="profileImg" src="profile.jpg">
-  <input type="file" accept="image/*" onchange="previewImage(event)">
+    <label>Email</label>
+    <input type="email" id="editEmail">
 
-  <label>Name</label>
-  <input type="text" placeholder="Enter your name">
+    <label>Bio</label>
+    <textarea id="editBio"></textarea>
 
-  <label>Email</label>
-  <input type="email" placeholder="Enter your email">
-
-  <label>Date of Birth</label>
-  <input type="date" >
-
-  <label>Bio</label>
-  <textarea>Write something about yourself</textarea>
-
-  <button onclick="updateProfile()">Save</button>
+    <button class="save-btn" onclick="saveData()">Save Changes</button>
 </div>
 
 <script>
-  function previewImage(event) {
-    document.getElementById("profileImg").src =
-      URL.createObjectURL(event.target.files[0]);
-  }
+    
+    window.onload = function() {
+        document.getElementById('editName').value = localStorage.getItem('pName') || "";
+        document.getElementById('editEmail').value = localStorage.getItem('pEmail') || "";
+        document.getElementById('editBio').value = localStorage.getItem('pBio') || "";
+        document.getElementById('previewImg').src = localStorage.getItem('pImg') || "profile.jpg";
+    };
 
-  function updateProfile() {
-    alert("Profile updated successfully");
-  }
+    function updatePreview(event) {
+        const reader = new FileReader();
+        reader.onload = function() {
+            document.getElementById('previewImg').src = reader.result;
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    }
+
+    function saveData() {
+        const name = document.getElementById('editName').value;
+        const email = document.getElementById('editEmail').value;
+        const bio = document.getElementById('editBio').value;
+        const img = document.getElementById('previewImg').src;
+
+        
+        localStorage.setItem('pName', name);
+        localStorage.setItem('pEmail', email);
+        localStorage.setItem('pBio', bio);
+        localStorage.setItem('pImg', img);
+
+        alert("Profile Updated!");
+        window.location.href = "../page/profile.html";
+    }
 </script>
-
 </body>
 </html>
