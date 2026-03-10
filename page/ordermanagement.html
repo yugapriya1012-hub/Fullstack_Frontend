@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Order Management</title>
+
+<style>
+body{
+font-family: Arial;
+background:#f5f5f5;
+}
+
+.container{
+width:70%;
+margin:auto;
+margin-top:50px;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+background:white;
+}
+
+th,td{
+padding:12px;
+border:1px solid #ddd;
+text-align:center;
+}
+
+th{
+background:#333;
+color:white;
+}
+
+button{
+padding:8px 15px;
+border:none;
+cursor:pointer;
+border-radius:5px;
+}
+
+.accept{
+background:green;
+color:white;
+}
+
+.reject{
+background:red;
+color:white;
+}
+
+.status{
+font-weight:bold;
+}
+</style>
+
+<script>
+
+function acceptOrder(orderId, phone){
+
+let message = `Hello! Your order #${orderId} has been accepted. Thank you for ordering.`
+
+let url = `https://wa.me/91${phone}?text=${encodeURIComponent(message)}`
+
+window.open(url, "_blank")
+
+document.getElementById("status"+orderId).innerHTML="Accepted"
+
+}
+
+
+function rejectOrder(orderId, phone){
+
+let message = `Hello! Your order #${orderId} could not be processed and has been rejected. Thank you for understanding.`
+
+let url = `https://wa.me/91${phone}?text=${encodeURIComponent(message)}`
+
+window.open(url, "_blank")
+
+document.getElementById("status"+orderId).innerHTML="Rejected"
+
+}
+
+</script>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Order Management</h2>
+
+<table>
+
+<tr>
+<th>Order ID</th>
+<th>Customer Name</th>
+<th>Phone</th>
+<th>Product</th>
+<th>Status</th>
+<th>Action</th>
+</tr>
+
+<tr>
+<td>101</td>
+<td>yuga</td>
+<td>6380495230</td>
+<td>Ferrero Cake</td>
+<td class="status" id="status101">Pending</td>
+
+<td>
+<button class="accept" onclick="acceptOrder(101,'6380495230')">Accept</button>
+<button class="reject" onclick="rejectOrder(101,'6380495230')">Reject</button>
+</td>
+
+</tr>
+
+<tr>
+<td>102</td>
+<td>Deshali</td>
+<td>7448529691</td>
+<td>Red Velvet Cake</td>
+<td class="status" id="status102">Pending</td>
+
+<td>
+<button class="accept" onclick="acceptOrder(102,'7448529691')">Accept</button>
+<button class="reject" onclick="rejectOrder(102,'7448529691')">Reject</button>
+</td>
+
+</tr>
+
+</table>
+
+</div>
+
+</body>
+</html>

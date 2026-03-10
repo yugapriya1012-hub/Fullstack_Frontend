@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Special Orders - Doughlightful</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        :root {
+            --pink: #ff4d88;
+            --deep-pink: #e63977;
+            --light-pink: #fff0f5;
+            --gold: #d4af37;
+            --dark-grey: #2d3436;
+            --glass: rgba(255, 255, 255, 0.9);
+        }
+
+        body {
+            font-family: 'Poppins', 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%);
+            margin: 0;
+            padding: 0;
+            color: var(--dark-grey);
+            min-height: 100vh;
+        }
+
+        /* --- Navigation Bar --- */
+        nav {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--pink);
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+
+        .nav-links { display: flex; gap: 25px; list-style: none; }
+        .nav-links a { 
+            text-decoration: none; color: var(--dark-grey); 
+            font-weight: 500; transition: 0.3s; 
+        }
+        .nav-links a:hover { color: var(--pink); }
+
+        /* --- Hero Section --- */
+        .container { max-width: 1100px; margin: 40px auto; padding: 0 20px; }
+        
+        .header-text { text-align: center; margin-bottom: 40px; }
+        .header-text h2 { 
+            font-size: 2.5rem; color: var(--dark-grey); margin-bottom: 10px;
+            background: linear-gradient(to right, var(--pink), var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* --- Category Grid --- */
+        .special-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+            gap: 25px; 
+        }
+
+        .special-card { 
+            position: relative;
+            height: 200px;
+            border-radius: 20px; 
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 20px;
+            color: white;
+            text-decoration: none;
+            cursor: pointer;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* Theme-specific background placeholders - Replace with real URLs */
+        .card-custom { background-image: linear-gradient(to top, rgba(0,0,0,0.7), transparent), url('https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&q=80&w=500'); }
+        .card-wedding { background-image: linear-gradient(to top, rgba(0,0,0,0.7), transparent), url('https://images.unsplash.com/photo-1527529482837-4698179dc6ce?auto=format&fit=crop&q=80&w=500'); }
+        .card-reception { background-image: linear-gradient(to top, rgba(0,0,0,0.7), transparent), url('https://images.unsplash.com/photo-1558636508-e0db3814bd1d?auto=format&fit=crop&q=80&w=500'); }
+        .card-anniversary { background-image: linear-gradient(to top, rgba(0,0,0,0.7), transparent), url('https://images.unsplash.com/photo-1535254973040-607b474cb8c9?auto=format&fit=crop&q=80&w=500'); }
+        .card-baby { background-image: linear-gradient(to top, rgba(0,0,0,0.7), transparent), url('https://images.unsplash.com/photo-1532499016263-f2c3e98df9cd?auto=format&fit=crop&q=80&w=500'); }
+        .card-corporate { background-image: linear-gradient(to top, rgba(0,0,0,0.7), transparent), url('https://images.unsplash.com/photo-1513151233558-d860c5398176?auto=format&fit=crop&q=80&w=500'); }
+
+        .special-card:hover { transform: scale(1.05); }
+        .special-card i { font-size: 1.5rem; margin-bottom: 10px; color: var(--pink); }
+        .special-card h3 { margin: 0; font-size: 1.4rem; letter-spacing: 1px; }
+
+        /* --- Form Section --- */
+        #customFormSection { 
+            display: none; background: white; padding: 40px; border-radius: 25px; 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1); border: 1px solid var(--light-pink);
+            animation: slideUp 0.5s ease;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .form-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 8px; font-weight: 600; font-size: 0.9rem; }
+        
+        input, select, textarea { 
+            width: 100%; padding: 14px; border: 2px solid #f0f0f0; border-radius: 12px; 
+            font-size: 1rem; transition: 0.3s; outline: none;
+        }
+        input:focus { border-color: var(--pink); }
+
+        .btn-confirm { 
+            background: var(--pink); color: white; border: none; padding: 18px; 
+            border-radius: 12px; font-size: 1.1rem; font-weight: bold; cursor: pointer; 
+            box-shadow: 0 5px 15px rgba(255, 77, 136, 0.3); transition: 0.3s;
+        }
+        .btn-confirm:hover { background: var(--deep-pink); transform: translateY(-2px); }
+
+        .back-btn { background: none; border: none; color: var(--pink); cursor: pointer; font-weight: 600; margin-bottom: 20px; font-size: 1rem; }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="#" class="logo">DOUGHLIGHTFUL</a>
+    <ul class="nav-links">
+        <li><a href="../page/home.html">HOME</a></li>
+        <li><a href="../page/product.html">PRODUCTS</a></li>
+        <li><a href="../page/customize.html">SPECIAL ORDERS</a></li>
+        <li><a href="../page/recipe.html">RECIPES</a></li>
+        <li><a href="../page/profile.html">PROFILE</a></li>
+        <li><a href="../page/about.html">ABOUT US</a></li>
+
+    </ul>
+</nav>
+
+<div class="container">
+    <div id="mainSelection">
+        <div class="header-text">
+            <h2>Celebrate with Style</h2>
+            <p>Pick a theme and let us bake your imagination into reality.</p>
+        </div>
+        
+        <div class="special-grid">
+            <div class="special-card card-custom" onclick="openCustomForm('Custom Masterpiece')">
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                <h3>Custom Theme</h3>
+            </div>
+            <div class="special-card card-wedding" onclick="openCustomForm('Wedding Cake')">
+                <i class="fa-solid fa-rings-wedding"></i>
+                <h3>Royal Wedding</h3>
+            </div>
+            <div class="special-card card-reception" onclick="openCustomForm('Reception Cake')">
+                <i class="fa-solid fa-champagne-glasses"></i>
+                <h3>Grand Reception</h3>
+            </div>
+            <div class="special-card card-anniversary" onclick="openCustomForm('Anniversary Cake')">
+                <i class="fa-solid fa-heart"></i>
+                <h3>Anniversary</h3>
+            </div>
+            <div class="special-card card-baby" onclick="openCustomForm('Baby Shower Cake')">
+                <i class="fa-solid fa-baby-carriage"></i>
+                <h3>Baby Shower</h3>
+            </div>
+            <div class="special-card card-corporate" onclick="openCustomForm('Corporate Event Cake')">
+                <i class="fa-solid fa-building"></i>
+                <h3>Corporate Event</h3>
+            </div>
+        </div>
+    </div>
+
+    <div id="customFormSection">
+        <button class="back-btn" onclick="goBack()"><i class="fa-solid fa-chevron-left"></i> All Themes</button>
+        <h3 id="formTitle" style="font-size: 1.8rem; margin-top: 0;">Order Your Cake</h3>
+        
+        <div class="form-grid">
+            <div class="form-group">
+                <label>Theme Name</label>
+                <input type="text" id="cakeName" placeholder="e.g. Minimalist Gold Leaf">
+            </div>
+            <div class="form-group">
+                <label>Weight (kg)</label>
+                <select id="cakeWeight">
+                    <option value="1kg">1 kg (Serves 8-10)</option>
+                    <option value="2kg">2 kg (Serves 15-20)</option>
+                    <option value="5kg+">5 kg+ (Party Size)</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Inscription on Cake</label>
+            <input type="text" id="cakeMessage" placeholder="Happy Anniversary, Sarah!">
+        </div>
+
+        <div class="form-group">
+            <label>Specific Cravings / Dietary Needs</label>
+            <textarea id="extraDetails" rows="3" placeholder="Eggless, Less Sugar, Belgian Chocolate..."></textarea>
+        </div>
+
+        <div class="button-group" style="display: flex; flex-direction: column; gap: 15px;">
+            <button class="btn-confirm" onclick="placeOrder()">Confirm Order</button>
+            <button class="btn-whatsapp" onclick="sendToWhatsApp()" style="background: none; border: none; color: #25D366; cursor: pointer; font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                <i class="fa-brands fa-whatsapp" style="font-size: 1.4rem;"></i> Chat with our Head Chef
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+    
+    let selectedCategory = "";
+
+    function openCustomForm(category) {
+        selectedCategory = category;
+        document.getElementById('mainSelection').style.display = 'none';
+        document.getElementById('customFormSection').style.display = 'block';
+        document.getElementById('formTitle').innerText = "Personalize: " + category;
+        window.scrollTo(0,0);
+    }
+
+    function goBack() {
+        document.getElementById('mainSelection').style.display = 'block';
+        document.getElementById('customFormSection').style.display = 'none';
+    }
+
+   
+</script>
+
+</body>
+</html>

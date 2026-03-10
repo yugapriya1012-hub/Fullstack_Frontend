@@ -3,68 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Profile</title>
-    <style>
-        body { margin: 0; font-family: 'Segoe UI', sans-serif; background-color: #ffecec; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
-        .box { background: white; width: 100%; max-width: 400px; padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
-        h3 { color: #ff9f43; text-align: center; }
-        label { display: block; margin-top: 15px; font-weight: bold; font-size: 0.9rem; }
-        input, textarea { width: 100%; padding: 10px; margin-top: 5px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; }
-        .save-btn { width: 100%; padding: 12px; background: #ff9f43; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; margin-top: 20px; }
-        #previewImg { width: 80px; height: 80px; border-radius: 50%; display: block; margin: 10px auto; object-fit: cover; border: 2px solid #ff9f43; }
-    </style>
+    <title>Edit Profile - Doughlightful</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="../page/css/edit.css">
 </head>
 <body>
 
 <div class="box">
-    <h3>Edit Information</h3>
+    <h3>Edit Profile</h3>
     
-    <img id="previewImg" src="profile.jpg">
-    <input type="file" accept="image/*" onchange="updatePreview(event)">
+    <div class="image-upload">
+        <img id="previewImg" src="pro.jpg" alt="Profile Preview">
+        <input type="file" id="imgInput" accept="image/*" style="margin-top: 10px; font-size: 0.8rem;">
+    </div>
+    
+    <div class="input-group">
+        <div class="label">Full Name</div>
+        <input type="text" id="editName" placeholder="Enter your name">
+    </div>
 
-    <label>Name</label>
-    <input type="text" id="editName">
+    <div class="input-group">
+        <div class="label">Email Address</div>
+        <input type="email" id="editEmail" placeholder="Enter your email">
+    </div>
 
-    <label>Email</label>
-    <input type="email" id="editEmail">
+    <div class="input-group">
+        <div class="label">Bio</div>
+        <textarea id="editBio" rows="3" placeholder="Tell us about yourself"></textarea>
+    </div>
 
-    <label>Bio</label>
-    <textarea id="editBio"></textarea>
-
-    <button class="save-btn" onclick="saveData()">Save Changes</button>
+    <button class="save-btn" onclick="saveProfile()">
+        <i class="fa-solid fa-check"></i> Save Changes
+    </button>
+    
+    <a href="profile.html" class="cancel-link">Cancel</a>
 </div>
 
 <script>
-    
+   
     window.onload = function() {
         document.getElementById('editName').value = localStorage.getItem('pName') || "";
         document.getElementById('editEmail').value = localStorage.getItem('pEmail') || "";
         document.getElementById('editBio').value = localStorage.getItem('pBio') || "";
-        document.getElementById('previewImg').src = localStorage.getItem('pImg') || "profile.jpg";
+        document.getElementById('previewImg').src = localStorage.getItem('pImg') || "pro.jpg";
     };
 
-    function updatePreview(event) {
+   
+    document.getElementById('imgInput').onchange = function(e) {
         const reader = new FileReader();
         reader.onload = function() {
             document.getElementById('previewImg').src = reader.result;
         };
-        reader.readAsDataURL(event.target.files[0]);
-    }
+        reader.readAsDataURL(e.target.files[0]);
+    };
 
-    function saveData() {
-        const name = document.getElementById('editName').value;
-        const email = document.getElementById('editEmail').value;
-        const bio = document.getElementById('editBio').value;
-        const img = document.getElementById('previewImg').src;
+    function saveProfile() {
+        const newName = document.getElementById('editName').value;
+        const newEmail = document.getElementById('editEmail').value;
+        const newBio = document.getElementById('editBio').value;
+        const newImg = document.getElementById('previewImg').src;
 
-        
-        localStorage.setItem('pName', name);
-        localStorage.setItem('pEmail', email);
-        localStorage.setItem('pBio', bio);
-        localStorage.setItem('pImg', img);
+      
+        localStorage.setItem('pName', newName);
+        localStorage.setItem('pEmail', newEmail);
+        localStorage.setItem('pBio', newBio);
+        localStorage.setItem('pImg', newImg);
 
-        alert("Profile Updated!");
-        window.location.href = "../page/profile.html";
+        alert("Profile updated successfully!");
+        window.location.href = 'profile.html'; 
     }
 </script>
 </body>

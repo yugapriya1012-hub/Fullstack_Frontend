@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Seller Profile - Doughlightful</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        body { 
+            margin: 0; 
+            font-family: 'Segoe UI', sans-serif; 
+            background-color: #ffecec; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            min-height: 100vh; 
+        }
+
+        .box { 
+            background: white; 
+            width: 90%; 
+            max-width: 400px; 
+            padding: 40px; 
+            border-radius: 20px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1); 
+            text-align: center; 
+            box-sizing: border-box; 
+        }
+
+        h3 { 
+            color: #ff4d88; 
+            margin-top: 0; 
+            text-transform: uppercase; 
+        }
+
+        .image-upload {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        #previewImg { 
+            width: 130px; 
+            height: 130px; 
+            border-radius: 50%; 
+            object-fit: cover; 
+            border: 5px solid #ff4d88; 
+        }
+
+        .input-group { 
+            text-align: left; 
+            margin-bottom: 15px; 
+        }
+        
+        .label { 
+            font-size: 0.8rem; 
+            color: #ff4d88; 
+            font-weight: bold; 
+            text-transform: uppercase; 
+            margin-bottom: 5px; 
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #fff0f0;
+            border-radius: 8px;
+            background-color: #fafafa;
+            color: #333;
+            box-sizing: border-box;
+            outline-color: #ff4d88;
+        }
+
+        .save-btn { 
+            width: 100%; 
+            padding: 12px; 
+            background: #ff4d88; 
+            color: white; 
+            border: none; 
+            border-radius: 8px; 
+            font-weight: bold; 
+            cursor: pointer; 
+            margin-top: 10px; 
+            transition: 0.3s; 
+        }
+        
+        .save-btn:hover { 
+            background: #e63977; 
+            transform: translateY(-2px); 
+        }
+
+        .cancel-link {
+            display: block;
+            margin-top: 15px;
+            color: #777;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+<div class="box">
+    <h3>Edit Seller Info</h3>
+    
+    <div class="image-upload">
+        <img id="previewImg" src="pro.jpg" alt="Profile Preview">
+        <input type="file" id="imgInput" accept="image/*" style="margin-top: 10px; font-size: 0.8rem;">
+    </div>
+    
+    <div class="input-group">
+        <div class="label">Seller Name</div>
+        <input type="text" id="editName" placeholder="Enter seller/business name">
+    </div>
+
+    <div class="input-group">
+        <div class="label">Business Email</div>
+        <input type="email" id="editEmail" placeholder="Enter business email">
+    </div>
+
+    <div class="input-group">
+        <div class="label">Business Bio</div>
+        <textarea id="editBio" rows="3" placeholder="Tell us about your products"></textarea>
+    </div>
+
+    <button class="save-btn" onclick="saveSellerProfile()">
+        <i class="fa-solid fa-check"></i> Save Changes
+    </button>
+    
+    <a href="s_profile.html" class="cancel-link">Cancel</a>
+</div>
+
+<script>
+    window.onload = function() {
+        document.getElementById('editName').value = localStorage.getItem('sName') || "";
+        document.getElementById('editEmail').value = localStorage.getItem('sEmail') || "";
+        document.getElementById('editBio').value = localStorage.getItem('sBio') || "";
+        document.getElementById('previewImg').src = localStorage.getItem('sImg') || "pro.jpg";
+    };
+
+    document.getElementById('imgInput').onchange = function(e) {
+        const reader = new FileReader();
+        reader.onload = function() {
+            document.getElementById('previewImg').src = reader.result;
+        };
+        reader.readAsDataURL(e.target.files[0]);
+    };
+
+    function saveSellerProfile() {
+        const sName = document.getElementById('editName').value;
+        const sEmail = document.getElementById('editEmail').value;
+        const sBio = document.getElementById('editBio').value;
+        const sImg = document.getElementById('previewImg').src;
+
+        localStorage.setItem('sName', sName);
+        localStorage.setItem('sEmail', sEmail);
+        localStorage.setItem('sBio', sBio);
+        localStorage.setItem('sImg', sImg);
+
+        alert("Seller profile updated!");
+        window.location.href = '/page/seller/s_profile.html'; 
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Doughlightful - My Orders</title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../page/css/home.css">
+  <link rel="stylesheet" href="../page/css/my_order.css">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      padding-top: 70px; 
+      background-color: #f9f9f9;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      margin: 0 !important;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 5%;
+    }
+
+    .nav-links li a {
+      text-decoration: none !important;
+    }
+
+    .nav-links li a[href*="my_order.html"] {
+      border-bottom: none !important; 
+    }
+
+    /* Card Styling */
+    .active-card {
+      max-width: 600px; 
+      margin: 10px auto !important; 
+      padding: 15px !important;
+      font-size: 0.9rem;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+
+    /* STATUS BADGE */
+    .eta-badge {
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 600;
+      color: black !important;
+      text-transform: capitalize;
+      background: #fff3cd; /* Yellow for pending */
+    }
+
+    .item-row {
+      padding: 5px 0 !important;
+    }
+
+    .items-list {
+      display: block !important;
+      padding-top: 10px;
+      border-top: 1px dashed #ccc;
+      margin-top: 10px;
+    }
+
+    .page {
+      padding: 15px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .topbar {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="logo">
+      <a href="home.html"><img src="../assets/logo.png" alt="Doughlightful Logo"></a>
+      <span>DOUGHLIGHTFUL</span>
+    </div>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="../page/home.html">HOME</a></li>
+        <li><a href="../page/product.html">PRODUCTS</a></li>
+        <li><a href="../page/recipe.html">RECIPES</a></li>
+        <li><a href="../page/my_order.html">MY ORDERS</a></li>
+        <li><a href="../page/profile.html">PROFILE</a></li>
+        <li><a href="../page/about.html">ABOUT US</a></li>
+      </ul>
+    </nav>
+  </header>
+  <div class="page">
+    <div class="topbar">
+      <div>
+        <div class="topbar-title" style="font-size: 20px; font-weight: bold;">My Orders</div>
+        <div class="topbar-sub" id="order-count" style="color: #666; font-size: 14px;">Loading...</div>
+      </div>
+    </div>
+
+    <div id="active-section">
+      <div class="section-label" style="font-weight: bold; margin-bottom: 10px; display: block;">🚚 Active Order</div>
+      <div id="active-order-container">
+        <div class="loading-state"><div class="spinner"></div>Fetching your order...</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const BACKEND = 'http://127.0.0.1:8000';
+
+    function fmtDate(str) {
+      if (!str) return '—';
+      const d = new Date(str);
+      return isNaN(d) ? str : d.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
+    }
+
+    const STEPS = ['Order Placed', 'Confirmed', 'Order Received ✅'];
+    const STEP_MAP = { pending: 0, accepted: 1, processing: 1, completed: 2, delivered: 2 };
+    const stepIdx = s => STEP_MAP[s?.toLowerCase()] ?? 0;
+
+    const STATUS_LABELS = {
+      pending: 'Pending', 
+      accepted: 'Accepted',
+      processing: 'Baking...',
+      completed: 'Order Received ✅', 
+      delivered: 'Delivered', 
+      cancelled: 'Cancelled'
+    };
+
+    function renderActiveOrders(orders) {
+      const container = document.getElementById('active-order-container');
+      if (!orders.length) {
+        container.innerHTML = `<div class="empty-state">✅ No active orders.</div>`;
+        return;
+      }
+
+      container.innerHTML = orders.map((o, oi) => {
+        const si = stepIdx(o.status);
+        const items = o.items || [];
+        const stepsHTML = STEPS.map((s, i) => {
+          const done = i <= si;
+          const active = i === si;
+          return `<div class="timeline-step">
+            <div class="step-dot ${active ? 'active' : done ? 'done' : ''}">${(done && !active) ? '✓' : (active ? '●' : '')}</div>
+            <span class="step-label ${active ? 'active' : done ? 'done' : ''}">${s}</span>
+          </div>`;
+        }).join('');
+
+        const itemsHTML = items.map(item => `
+          <div class="item-row">
+            <span>🍩 ${item.product_name || item.name || 'Item'} (x${item.quantity})</span>
+            <span style="float:right">Rs. ${Number(item.price).toFixed(2)}</span>
+          </div>`).join('');
+
+        return `
+        <div class="active-card">
+          <div class="active-header" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+            <div class="order-id" style="font-weight:bold">Order #${o.id}</div>
+            <div class="eta-badge">${STATUS_LABELS[o.status.toLowerCase()] || o.status}</div>
+          </div>
+          <div class="active-body">
+            <div class="timeline" style="margin-bottom:15px;">
+              <div class="timeline-track"></div>
+              <div class="timeline-progress" id="prog-${oi}" style="width:0"></div>
+              <div class="timeline-steps" id="tsteps-${oi}">${stepsHTML}</div>
+            </div>
+            <div style="font-size:13px; color:#555; margin-bottom:10px;">📅 Delivery: ${fmtDate(o.delivery_date)}</div>
+            <div class="items-list">${itemsHTML}</div>
+            <div style="text-align:right; font-weight:bold; margin-top:10px; border-top:1px solid #eee; padding-top:5px;">
+              Total: Rs. ${Number(o.total_amount || 0).toFixed(2)}
+            </div>
+          </div>
+        </div>`;
+      }).join('');
+
+      setTimeout(() => {
+        orders.forEach((o, oi) => {
+          const stepsEl = document.getElementById(`tsteps-${oi}`);
+          const progActualEl = document.getElementById(`prog-${oi}`);
+          if (!stepsEl || !progActualEl) return;
+          const dots = stepsEl.querySelectorAll('.step-dot');
+          const si = stepIdx(o.status);
+          if(dots[si]) {
+            const firstRect = dots[0].getBoundingClientRect();
+            const currRect = dots[si].getBoundingClientRect();
+            progActualEl.style.width = Math.max(0, (currRect.left + currRect.width / 2) - (firstRect.left + firstRect.width / 2)) + 'px';
+          }
+        });
+      }, 100);
+    }
+
+    async function loadOrders() {
+      let customerId = localStorage.getItem('customer_id');
+      const email = localStorage.getItem('pEmail');
+
+      try {
+        if (!customerId && email) {
+          const res = await fetch(`${BACKEND}/customers/by-email?email=${encodeURIComponent(email)}`);
+          if (res.ok) {
+            const c = await res.json();
+            customerId = c.id;
+            localStorage.setItem('customer_id', customerId);
+          }
+        }
+        const res = await fetch(`${BACKEND}/orders/customer/${customerId}`);
+        if (!res.ok) throw new Error('Fetch failed');
+        const orders = await res.json();
+
+        
+        const activeStatuses = ['pending', 'accepted', 'processing', 'completed'];
+        const activeOrders = orders.filter(o => activeStatuses.includes(o.status?.toLowerCase()));
+
+        document.getElementById('order-count').textContent = `${activeOrders.length} active orders`;
+        renderActiveOrders(activeOrders.sort((a,b) => b.id - a.id));
+      } catch (err) {
+        document.getElementById('active-order-container').innerHTML = `<div class="empty-state">⚠️ Connection Error</div>`;
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', loadOrders);
+  </script>
+</body>
+</html>

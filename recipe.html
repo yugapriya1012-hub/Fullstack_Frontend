@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recipe Collection - Doughlightful</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+    :root {
+      --pink: #ff4d88;
+      --deep-pink: #e63977;
+      --light-pink: #fff0f5;
+      --dark-grey: #2d3436;
+      --text-muted: #636e72;
+      --white: #ffffff;
+      --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    }
+
+    /* --- RESET & GLOBAL --- */
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #fdf8f9;
+      margin: 0;
+      padding: 0;
+      color: var(--dark-grey);
+    }
+
+    /* --- CORRECTED NAVBAR --- */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 8%;
+      height: 80px; /* Fixed height for consistency */
+      background: var(--white);
+      box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+      position: fixed; /* Fixes nav to the top */
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000; /* Ensures it stays above all content */
+    }
+
+    .logo { 
+      display: flex; 
+      align-items: center; 
+      gap: 12px; 
+      text-decoration: none; 
+    }
+    
+    .logo img { width: 40px; height: auto; }
+    
+    .logo span {
+      font-weight: 700;
+      color: var(--pink);
+      letter-spacing: 1px;
+      font-size: 1.3rem;
+    }
+
+    .nav-links { 
+      list-style: none; 
+      display: flex; 
+      gap: 25px; 
+      margin: 0; 
+      padding: 0; 
+    }
+    
+    .nav-links a {
+      text-decoration: none;
+      color: var(--dark-grey);
+      font-weight: 500;
+      font-size: 0.9rem;
+      transition: 0.3s;
+      text-transform: uppercase;
+    }
+    
+    .nav-links a:hover { color: var(--pink); }
+
+    /* --- PAGE CONTENT SPACING --- */
+    main {
+      margin-top: 100px; /* Adds space so content doesn't hide under the fixed nav */
+      padding: 20px 8%;
+    }
+
+    header.page-head {
+      text-align: center;
+      padding: 40px 0;
+    }
+
+    h1 { font-size: 2.5rem; margin: 0; }
+    .subtitle { color: var(--text-muted); font-size: 1rem; margin-top: 10px; }
+
+    /* --- SEARCH BAR --- */
+    .search-container {
+      max-width: 600px;
+      margin: 0 auto 50px;
+    }
+
+    .search-bar {
+      width: 100%;
+      padding: 15px 25px;
+      border: 2px solid var(--light-pink);
+      border-radius: 50px;
+      font-size: 1rem;
+      outline: none;
+      box-shadow: var(--shadow);
+      transition: 0.3s;
+    }
+
+    .search-bar:focus { border-color: var(--pink); }
+
+    /* --- RECIPE GRID --- */
+    .recipe-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 30px;
+      margin-top: 20px;
+    }
+
+    .card {
+      background: var(--white);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: 0.3s;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card:hover { transform: translateY(-8px); }
+
+    .card img { width: 100%; height: 200px; object-fit: cover; }
+
+    .card-content { padding: 20px; flex-grow: 1; }
+    .card-content h3 { margin: 0 0 10px; font-size: 1.2rem; }
+    .card-content p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; }
+    
+    .author { font-size: 0.75rem; color: var(--pink); font-weight: 600; }
+
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 15px;
+      border-top: 1px solid #f9f9f9;
+      margin-top: 15px;
+    }
+
+    .time { font-size: 0.8rem; color: #999; }
+
+    .view-btn {
+      text-decoration: none;
+      background: var(--pink);
+      color: white;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    .view-btn:hover { background: var(--deep-pink); }
+
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <a href="home.html" class="logo">
+      <img src="../assets/logo.png" alt="Logo" onerror="this.src='https://cdn-icons-png.flaticon.com/512/992/992717.png'">
+      <span>DOUGHLIGHTFUL</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="home.html">Home</a></li>
+      <li><a href="product.html">Products</a></li>
+      <li><a href="recipe.html" style="color: var(--pink)">Recipes</a></li>
+      <li><a href="customize.html">Customize</a></li>
+      <li><a href="profile.html">Profile</a></li>
+      <li><a href="about.html">About Us</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <header class="page-head">
+      <h1>Recipe Collection</h1>
+      <p class="subtitle">Baking inspiration from our community of creators</p>
+    </header>
+
+    <div class="search-container">
+      <input type="text" class="search-bar" placeholder="Search for recipes...">
+    </div>
+
+    <div class="recipe-grid">
+      <div class="card">
+        <img src="https://mojo.generalmills.com/api/public/content/_pLFRXFETcuXWg_Z0MhZPw_webp_base.webp?v=1c273e93&t=191ddcab8d1c415fa10fa00a14351227" alt="Cookies">
+        <div class="card-content">
+          <span class="author">By Nisha</span>
+          <h3>Chocolate Chip Cookies</h3>
+          <p>The perfect balance of crispy edges and chewy centers.</p>
+          <div class="card-footer">
+            <span class="time"><i class="fa-regular fa-clock"></i> 25 min</span>
+            <a href="cookies.html" class="view-btn">View Recipe</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="https://i.pinimg.com/736x/48/30/d7/4830d7a27082bdbfb689d27e2d1bf7bd.jpg" alt="Chocolate Cake">
+        <div class="card-content">
+          <span class="author">By Priya</span>
+          <h3>Chocolate Cake</h3>
+          <p>Rich, moist chocolate cake perfect for special occasions.</p>
+          <div class="card-footer">
+            <span class="time"><i class="fa-regular fa-clock"></i> 1 hour</span>
+            <a href="cakerecipe.html" class="view-btn">View Recipe</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="https://apronandwhisk.com/wp-content/uploads/2021/09/Bezzun-tal-krema-Apron-Whisk-food-photography-9.jpg" alt="Cream Bun">
+        <div class="card-content">
+          <span class="author">By Deepa</span>
+          <h3>Cream Bun Cake</h3>
+          <p>Soft and delicious buns that melt in your mouth.</p>
+          <div class="card-footer">
+            <span class="time"><i class="fa-regular fa-clock"></i> 45 min</span>
+            <a href="cream_bun.html" class="view-btn">View Recipe</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="https://bonnibakery.com/wp-content/uploads/2021/02/Tiramisu-Cake2303-1-1.jpg.webp" alt="Tiramisu">
+        <div class="card-content">
+          <span class="author">By Nisha</span>
+          <h3>Tiramisu Cake</h3>
+          <p>Italian dessert with coffee and mascarpone layers.</p>
+          <div class="card-footer">
+            <span class="time"><i class="fa-regular fa-clock"></i> 45 min</span>
+            <a href="tiramisu.html" class="view-btn">View Recipe</a>
+          </div>
+        </div>
+      </div>
+
+      
+    </div>
+  </main>
+
+</body>
+</html>

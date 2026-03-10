@@ -2,53 +2,123 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Add Recipe</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Recipe - Doughlightful</title>
     <link rel="stylesheet" href="../css/sellerCSS/add_recipe.css">
 </head>
 <body>
 
-<div class="container">
+    <nav class="navbar">
+        <a href="dashboard.html" class="nav-logo">
+            <img src="/assets/logo.png" alt="Logo">
+            <span>DOUGHLIGHTFUL</span>
+        </a>
+        <ul class="nav-links">
+            <!-- <li><a href="dashboard.html">Dashboard</a></li> -->
+            <li><a href="add_product.html">Products</a></li>
+            <!-- <li><a href="">Customize</a></li> -->
+            <li><a href="../seller/order_management.html">ORDER MANAGEMENT</a></li>
+          
+            <li><a href="../seller/s_profile.html">Profile</a></li>
 
-    <!-- Vertical Navbar (SAME as product page) -->
-    <div class="sidebar">
-        <h1>Doughlightful</h1>
-        <a href="dashboard.html">Dashboard</a>
-        <a href="add_product.html">Add Product</a>
-        <a href="add_recipe.html" class="active">Add Recipe</a>
-        <a href="../profile.html">Profile</a>
-        <a href="logout.html">Sign Out</a>
-    </div>
+            <li><a href="logout.html" class="logout-btn">Sign Out</a></li>
+        </ul>
+    </nav>
 
-    <!-- Recipe Content -->
     <div class="content">
         <div class="content-box">
-            <h2>Add Recipe</h2>
+            <h2>Share Your Recipe</h2>
+            <form class="recipe-form" id="recipeForm">
+                <div class="form-group">
+                    <label>Seller Name</label>
+                    <input type="text" id="sellerName" placeholder="Enter your name" required>
+                </div>
 
-            <form class="recipe-form">
-                 <label>Seller Name</label>
-                <input type="text" placeholder="Enter seller name">
-                <label>Recipe Name</label>
+                <div class="form-group">
+                    <label>Recipe Name</label>
+                    <input type="text" id="recipeName" placeholder="e.g. Vanilla Cupcakes" required>
+                </div>
 
-                <input type="text" placeholder="Enter recipe name">
+                <div class="form-group">
+                    <label>Cooking Time</label>
+                    <input type="text" id="cookTime" placeholder="Eg: 30 minutes" required>
+                </div>
 
-                <label>Recipe Image</label>
-                <input type="file">
+                <div class="form-group">
+                    <label>Recipe Image</label>
+                    <input type="file" id="recipeImage" accept="image/*" required>
+                </div>
 
-                <label>Ingredients</label>
-                <textarea placeholder="Enter ingredients"></textarea>
+                <div class="form-group full-width">
+                    <label>Ingredients</label>
+                    <textarea id="ingredients" placeholder="List your ingredients here..." required></textarea>
+                </div>
 
-                <label>Instructions</label>
-                <textarea placeholder="Enter cooking steps"></textarea>
+                <div class="form-group full-width">
+                    <label>Instructions</label>
+                    <textarea id="instructions" placeholder="Step 1: Preheat oven..." required></textarea>
+                </div>
 
-                <label>Cooking Time</label>
-                <input type="text" placeholder="Eg: 30 minutes">
-
-                <a href="recipe_succ.html"><button type="button" class="active">Add Recipe</button></a>
+                <button type="submit" class="submit-btn" id="publishBtn">Publish Recipe</button>
             </form>
         </div>
     </div>
 
-</div>
+    
 
+    <script>
+        
+        window.onload = function() {
+            const savedName = localStorage.getItem('seller_name');
+            if(savedName) {
+                document.getElementById('sellerName').value = savedName;
+            }
+        }
+
+        
+        document.getElementById('recipeForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const btn = document.getElementById('publishBtn');
+            btn.innerText = "Publishing...";
+            btn.style.opacity = "0.7";
+
+            
+            const formData = new FormData();
+            formData.append('seller_name', document.getElementById('sellerName').value);
+            formData.append('recipe_name', document.getElementById('recipeName').value);
+            formData.append('cook_time', document.getElementById('cookTime').value);
+            formData.append('ingredients', document.getElementById('ingredients').value);
+            formData.append('instructions', document.getElementById('instructions').value);
+            formData.append('image', document.getElementById('recipeImage').files[0]);
+
+            try {
+                const response = await fetch('http://127.0.0.1:8000/recipes/', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (response.ok) {
+                   
+                    alert("Recipe added successfully!");
+                    
+                    
+                    document.getElementById('recipeForm').reset();
+                    
+                   
+                    const savedName = localStorage.getItem('seller_name');
+                    if(savedName) document.getElementById('sellerName').value = savedName;
+                } else {
+                    alert("Failed to add recipe. Please check your inputs.");
+                }
+            } catch (error) {
+                console.error("Error:", error);
+                alert("Connection error. Is your FastAPI server running?");
+            } finally {
+                btn.innerText = "Publish Recipe";
+                btn.style.opacity = "1";
+            }
+        });
+    </script>
 </body>
 </html>

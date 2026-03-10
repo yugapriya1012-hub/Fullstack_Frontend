@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Browse Products - Doughlightful</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link rel="stylesheet" href="../page/css/product.css">
+  <link rel="stylesheet" href="../css/sellerCSS/seller_prod.css">
 </head>
 <body>
 
@@ -13,19 +13,14 @@
 
   <header class="navbar">
     <a href="home.html" class="logo">
-      <img src="../assets/logo.png" alt="Logo" width="40" height="40">
+      <img src="/assets/logo.png" alt="Logo" width="40" height="40">
       <span>DOUGHLIGHTFUL</span>
     </a>
     <nav>
       <ul class="nav-links">
-        <li><a href="home.html">HOME</a></li>
-        <li><a href="product.html" class="active">PRODUCTS</a></li>
-        <!-- <li><a href="recipe.html">RECIPES</a></li> -->
-        <!-- <li><a href="../page/customize.html">SPECIAL ORDERS</a></li> -->
-        <li id="cartWrapper"><a href="../page/cart.html">CARTS <span id="cartDot" style="color: #ff4d88; display: none;">●</span></a></li>
-        <li><a href="../page/my_order.html">MY ORDERS</a></li>
+        <li><a href="./add_product.html">PRODUCTS</a></li>
+        <li><a href="../seller/order_management.html">ORDER MANAGEMENT</a></li>
         <li><a href="../page/profile.html">PROFILE</a></li>
-        <li><a href="about.html">ABOUT US</a></li>
       </ul>
     </nav>
   </header>
@@ -82,7 +77,7 @@ function addToCart(product) {
         cart.push({ ...product, quantity: 1 });
         localStorage.setItem('cart', JSON.stringify(cart));
         updateCartUI();
-        showToast(`${product.name} added to cart! 🍰`);
+        showToast(`${product.name} added to cart!`);
     } else {
         showToast("Item is already in your cart!");
     }

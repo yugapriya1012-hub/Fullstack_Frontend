@@ -47,24 +47,24 @@
     document.addEventListener('DOMContentLoaded', () => {
         const navLinks = document.querySelectorAll('.nav-link');
         
-        // 1. Function to check if user is logged in
+      
         function checkLoginStatus() {
-            // For now, check if a 'user' token exists in localStorage
+           
             return localStorage.getItem('user_token') !== null;
         }
 
         navLinks.forEach(link => {
             link.addEventListener('click', (e) => {
-                // 2. If trying to go to 'About Us', allow it
+               
                 if (link.getAttribute('href').includes('about.html')) {
                     return; 
                 }
 
-                // 3. For other pages, check login
+                
                 if (!checkLoginStatus()) {
-                    e.preventDefault(); // Stop navigation
+                    e.preventDefault(); 
                     alert("Please log in first to view this page.");
-                    window.location.href = "page/signin.html"; // Redirect to login
+                    window.location.href = "page/signin.html";
                 }
             });
         });

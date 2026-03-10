@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Doughlightful - Homemade Happiness</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+    :root {
+      --pink: #ff4d88;
+      --deep-pink: #e63946;
+      --soft-pink: #fff0f5;
+      --white: #ffffff;
+      --dark-grey: #2d3436;
+      --text-grey: #636e72;
+      --shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #ffffff;
+      color: var(--dark-grey);
+      line-height: 1.6;
+    }
+
+    /* --- Navbar (Fixed at Top) --- */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 8%;
+      height: 80px;
+      background-color: var(--white);
+      box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .logo img { height: 45px; width: auto; }
+    .logo span {
+      font-weight: 700;
+      color: var(--pink);
+      font-size: 1.4rem;
+      letter-spacing: 1px;
+    }
+
+    .nav-links { list-style: none; display: flex; gap: 25px; }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--dark-grey);
+      font-weight: 500;
+      transition: 0.3s;
+    }
+    .nav-links a:hover { color: var(--pink); }
+
+    /* --- Welcome Section (Now Fully Centered) --- */
+    .welcome {
+      margin-top: 80px; /* Offset for fixed nav */
+      background: linear-gradient(135deg, #fff0f5 0%, #ffffff 100%);
+      padding: 100px 8%;
+      text-align: center; /* Center text align */
+      display: flex;
+      flex-direction: column;
+      justify-content: center; /* Vertical center */
+      align-items: center; /* Horizontal center */
+      min-height: 85vh;
+    }
+
+    .welcome-text {
+      max-width: 800px; /* Wider for centered layout */
+    }
+
+    .welcome-text h1 {
+      font-size: clamp(2.5rem, 5vw, 3.8rem);
+      color: var(--dark-grey);
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+
+    .highlight { color: var(--pink); }
+
+    .welcome-text p {
+      font-size: 1.2rem;
+      color: var(--text-grey);
+      margin-bottom: 35px;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .welcome-buttons {
+      display: flex;
+      gap: 20px;
+      justify-content: center; /* Center buttons */
+    }
+
+    .btn {
+      padding: 14px 35px;
+      border-radius: 50px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: 0.3s;
+      display: inline-block;
+      border: none;
+      font-size: 1rem;
+    }
+
+    .primary {
+      background-color: var(--pink);
+      color: white;
+      box-shadow: 0 5px 15px rgba(255, 77, 136, 0.3);
+    }
+
+    .secondary {
+      background-color: white;
+      color: var(--pink);
+      border: 2px solid var(--pink);
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    }
+
+    /* --- Why Choose Us Section --- */
+    .choose {
+      padding: 100px 8%;
+      text-align: center;
+      background-color: #fafafa;
+    }
+
+    .choose h2 { font-size: 2.2rem; margin-bottom: 60px; }
+    
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 40px;
+    }
+
+    .card {
+      background: white;
+      padding: 50px 30px;
+      border-radius: 25px;
+      box-shadow: var(--shadow);
+      transition: 0.4s;
+    }
+
+    .card:hover { transform: translateY(-10px); }
+    .card img { width: 90px; margin-bottom: 25px; }
+    .card h3 { margin-bottom: 15px; color: var(--pink); font-size: 1.5rem; }
+    .card p { color: var(--text-grey); font-size: 0.95rem; }
+
+    /* --- Featured Treats --- */
+    .product_items { padding: 100px 8%; text-align: center; }
+    .product_items h2 { font-size: 2.2rem; margin-bottom: 15px; }
+    
+    .treat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      margin-top: 60px;
+    }
+
+    .treat-card {
+      background: white;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      text-align: left;
+      transition: 0.3s;
+    }
+
+    .treat-card:hover { transform: scale(1.03); }
+    .treat-card img { width: 100%; height: 230px; object-fit: cover; }
+    .treat-content { padding: 25px; }
+    .treat-card h4 { font-size: 1.3rem; margin-bottom: 8px; }
+    .treat-card .baker { font-size: 0.85rem; color: var(--text-grey); margin-bottom: 12px; }
+    .treat-card .price { font-weight: 700; color: var(--pink); font-size: 1.2rem; }
+    
+    .rating { color: #f1c40f; margin-top: 10px; font-weight: bold; }
+
+    /* --- Footer --- */
+    .footer {
+      background-color: #2d3436;
+      color: white;
+      padding: 80px 8% 40px;
+    }
+
+    .footer-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 50px;
+    }
+
+    .footer-about h2 { color: var(--pink); margin-bottom: 25px; font-size: 1.8rem; }
+    .footer-contact h3 { margin-bottom: 25px; font-size: 1.4rem; }
+    .footer-contact p { margin-bottom: 10px; color: #dfe6e9; }
+    .footer-contact a { color: var(--pink); text-decoration: none; }
+    
+    .social-icons { margin-top: 25px; }
+    .social-icons a { font-size: 1.6rem; margin-right: 20px; color: white; transition: 0.3s; }
+    .social-icons a:hover { color: var(--pink); transform: scale(1.2); display: inline-block; }
+
+    .footer-bottom {
+      text-align: center;
+      margin-top: 70px;
+      padding-top: 25px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      font-size: 0.9rem;
+      color: #b2bec3;
+    }
+
+    @media (max-width: 768px) {
+      .welcome-text h1 { font-size: 2.2rem; }
+      .nav-links { display: none; }
+      .welcome { padding: 80px 5%; }
+    }
+  </style>
+</head>
+
+<body>
+  
+  <header class="navbar">
+    <a href="home.html" class="logo">
+      <img src="../assets/logo.png" alt="Logo" onerror="this.src='https://cdn-icons-png.flaticon.com/512/992/992717.png'">
+      <span>DOUGHLIGHTFUL</span>
+    </a>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="home.html">HOME</a></li>
+        <li><a href="product.html">PRODUCTS</a></li>
+        <li><a href="recipe.html">RECIPES</a></li>
+        <li><a href="customize.html">SPECIAL ORDERS</a></li>
+        <li><a href="profile.html">PROFILE</a></li>
+        <li><a href="about.html">ABOUT US</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="welcome">
+    <div class="welcome-text">
+      <h1>Baking Memories <span class="highlight">Homemade</span> With Love</h1>
+      <p>Discover authentic treats crafted by local home bakers. Support your community while indulging in unique flavors you won't find anywhere else.</p>
+      <div class="welcome-buttons">
+        <a href="product.html" class="btn primary">Shop Now</a>
+        <a href="recipe.html" class="btn secondary">Browse Recipes</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="choose">
+    <h2>Why Choose Doughlightful?</h2>
+    <div class="cards">
+      <div class="card">
+        <img src="https://cdn-icons-png.flaticon.com/512/2589/2589175.png" alt="Heart">
+        <h3>Made with Love</h3>
+        <p>Every product is crafted by passionate home bakers who pour their heart into each creation.</p>
+      </div>
+      <div class="card">
+        <img src="https://cdn-icons-png.flaticon.com/512/3361/3361811.png" alt="Community">
+        <h3>Local Community</h3>
+        <p>Support local talent and discover hidden gems right in your neighborhood.</p>
+      </div>
+      <div class="card">
+        <img src="https://cdn-icons-png.flaticon.com/512/2615/2615124.png" alt="Fresh">
+        <h3>Fresh & Unique</h3>
+        <p>Enjoy fresh, homemade treats with unique family recipes and premium ingredients.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="product_items">
+    <div class="container">
+      <h2>Featured Treats</h2>
+      <p style="color: var(--text-grey);">Hand-picked delights from our top-rated home bakers.</p>
+
+      <div class="treat-grid">
+        <div class="treat-card">
+          <img src="https://images.unsplash.com/photo-1583743089695-4b816a340f82?auto=format&fit=crop&w=500&q=60" alt="cookies">
+          <div class="treat-content">
+            <h4>Chocolate Chip Cookies</h4>
+            <p class="baker">by Sarah's Kitchen</p>
+            <p class="price">Rs.500 / kg</p>
+            <div class="rating">★ 4.9</div>
+          </div>
+        </div>
+
+        <div class="treat-card">
+          <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=500&q=60" alt="cake">
+          <div class="treat-content">
+            <h4>Deep Chocolate Cake</h4>
+            <p class="baker">by Mikel's Bread Co</p>
+            <p class="price">Rs.1,200 / kg</p>
+            <div class="rating">★ 4.8</div>
+          </div>
+        </div>
+
+        <div class="treat-card">
+          <img src="https://images.unsplash.com/photo-1550617931-e17a7b70dce2?auto=format&fit=crop&w=500&q=60" alt="cupcake">
+          <div class="treat-content">
+            <h4>Vanilla Dream Cupcakes</h4>
+            <p class="baker">by Lucy's Treats</p>
+            <p class="price">Rs.350 / 6pcs</p>
+            <div class="rating">★ 4.7</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top: 60px;">
+        <a href="product.html" class="btn primary">Explore All Products</a>
+      </div>
+    </div>
+  </section>
+    
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-about">
+        <h2>Doughlightful</h2>
+        <p>Connecting homebakers and dessert lovers everywhere. Every treat is a unique labor of love and community spirit.</p>
+      </div>
+
+      <div class="footer-contact">
+        <h3>Contact Us</h3>
+        <p>Email: <a href="mailto:hello@doughlightful.com">hello@doughlightful.com</a></p>
+        <p>Phone: +91 98765 43210</p>
+        <div class="social-icons">
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-facebook"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2026 Doughlightful. All Rights Reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>

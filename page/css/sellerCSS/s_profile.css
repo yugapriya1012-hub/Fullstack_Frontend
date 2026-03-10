@@ -1,4 +1,4 @@
-  body { 
+body { 
             margin: 0; 
             font-family: 'Segoe UI', sans-serif; 
             background-color: #ffecec; 
@@ -19,11 +19,7 @@
             box-sizing: border-box; 
         }
 
-        h3 { 
-            color: #ff4d88; 
-            margin-top: 0; 
-            text-transform: uppercase; 
-        }
+        h3 { color: #ff4d88; margin-top: 0; text-transform: uppercase; }
 
        
         #displayImg { 
@@ -36,23 +32,9 @@
             display: inline-block;
         }
 
-        .info-group { 
-            text-align: left; 
-            margin-bottom: 15px; 
-            border-bottom: 1px solid #fff0f0; 
-            padding-bottom: 10px; 
-        }
-        .label { 
-            font-size: 0.8rem; 
-            color: #ff4d88; 
-            font-weight: bold; 
-            text-transform: uppercase; 
-        }
-        .value { 
-            font-size: 1.1rem; 
-            color: #333; 
-            margin-top: 5px;
-        }
+        .info-group { text-align: left; margin-bottom: 15px; border-bottom: 1px solid #fff0f0; padding-bottom: 10px; }
+        .label { font-size: 0.8rem; color: #ff4d88; font-weight: bold; text-transform: uppercase; }
+        .value { font-size: 1.1rem; color: #333; margin-top: 5px; }
 
         .edit-btn { 
             width: 100%; 
@@ -66,7 +48,4 @@
             margin-top: 20px; 
             transition: 0.3s; 
         }
-        .edit-btn:hover { 
-            background: #e63977; 
-            transform: translateY(-2px); 
-        }
+        .edit-btn:hover { background: #e63977; transform: translateY(-2px); }
