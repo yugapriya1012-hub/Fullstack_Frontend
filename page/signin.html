@@ -86,8 +86,8 @@
     const role = userRoleInput.value;
 
     const url = role === "customer" 
-      ? "http://127.0.0.1:8000/customers/login" 
-      : "http://127.0.0.1:8000/seller/login";
+      ? "https://fullstackapi-two.vercel.app/customers/login" 
+      : "https://fullstackapi-two.vercel.app/seller/login";
 
     try {
       const response = await fetch(url, {

@@ -70,7 +70,7 @@
             // 2. Call the FastAPI backend to log the logout action
             // We only call it if a sellerId exists to avoid errors
             if (sellerId) {
-                await fetch(`http://127.0.0.1:8000/seller/logout?seller_id=${sellerId}`, {
+                await fetch(`https://fullstackapi-two.vercel.app/seller/logout?seller_id=${sellerId}`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
