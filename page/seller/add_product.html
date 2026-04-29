@@ -14,8 +14,6 @@
             <span>DOUGHLIGHTFUL</span>
         </a>
         <ul class="nav-links">
-            <!-- <li><a href="dashboard.html">Dashboard</a></li> -->
-            <!-- <li><a href="/page/seller/add_recipe.html">RECIPES</a></li> -->
             <li><a href="/page/seller/seller_product.html">PRODUCTS</a></li>
             <li><a href="../seller/order_management.html">ORDER MANAGEMENT</a></li>
             <li><a href="/page/seller/s_profile.html">PROFILE</a></li>
@@ -51,7 +49,7 @@
                 <div class="form-group">
                     <label>Discount (%)</label>
                     <input type="number" id="discount" placeholder="0" required>
-                </div>
+                </div> 
 
                 <div class="form-group">
                     <label>Location / Places</label>
@@ -69,7 +67,6 @@
     </div>
 
 <script>
-    // Autofill Seller Name
     window.onload = function() {
         const savedName = localStorage.getItem('seller_name');
         if(savedName) document.getElementById('sellerId').value = savedName;

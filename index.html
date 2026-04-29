@@ -42,9 +42,9 @@
       <img src="https://i.pinimg.com/1200x/35/b4/d8/35b4d8ce2640a9e7cf0d29672358a89c.jpg" alt="Delightful Cake" />
     </div>
   </section>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
+</body>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {     
         const navLinks = document.querySelectorAll('.nav-link');
         
       
@@ -55,11 +55,6 @@
 
         navLinks.forEach(link => {
             link.addEventListener('click', (e) => {
-               
-                if (link.getAttribute('href').includes('about.html')) {
-                    return; 
-                }
-
                 
                 if (!checkLoginStatus()) {
                     e.preventDefault(); 
@@ -70,5 +65,4 @@
         });
     });
   </script>
-</body>
 </html>

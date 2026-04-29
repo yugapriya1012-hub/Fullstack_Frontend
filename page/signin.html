@@ -6,21 +6,7 @@
   <title>Doughlightful - Sign In</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="../page/css/signin.css">
-  <style>
-    /* Ensure the toggle looks good if it's not in your CSS yet */
-    .toggle-container {
-      position: relative; display: flex; background: #f0f0f0;
-      height: 40px; border-radius: 20px; margin: 20px 0; cursor: pointer;
-      border: 1px solid #ddd;
-    }
-    .toggle-container div { flex: 1; text-align: center; line-height: 40px; z-index: 2; font-weight: bold; color: #888; transition: 0.3s; }
-    .toggle-container div.active-text { color: #fff; }
-    .slider {
-      position: absolute; left: 0; top: 0; height: 100%; width: 50%;
-      background: #e84a5f; border-radius: 20px; transition: 0.3s ease; z-index: 1;
-    }
-    .toggle-container.baker-active .slider { left: 50%; }
-  </style>
+
 </head>
 <body>
 
@@ -58,67 +44,6 @@
   </div>
 </main>
 
-<script>
-  const roleToggle = document.getElementById('roleToggle');
-  const userRoleInput = document.getElementById('userRole');
-  const formTitle = document.getElementById('formTitle');
-  const customerTab = document.getElementById('customerTab');
-  const bakerTab = document.getElementById('bakerTab');
-
-
-  roleToggle.addEventListener('click', () => {
-    roleToggle.classList.toggle('baker-active');
-    const isBaker = roleToggle.classList.contains('baker-active');
-    
-    userRoleInput.value = isBaker ? "baker" : "customer";
-    formTitle.innerText = isBaker ? "Baker Sign In" : "Customer Sign In";
-    
-    customerTab.classList.toggle('active-text', !isBaker);
-    bakerTab.classList.toggle('active-text', isBaker);
-  });
-
-
-  document.getElementById('signinForm').addEventListener('submit', async (e) => {
-    e.preventDefault();
-
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
-    const role = userRoleInput.value;
-
-    const url = role === "customer" 
-      ? "https://fullstackapi-two.vercel.app/customers/login" 
-      : "https://fullstackapi-two.vercel.app/seller/login";
-
-    try {
-      const response = await fetch(url, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password })
-      });
-
-      const data = await response.json();
-
-      if (response.ok) {
-        alert("Login Successful!");
-
-        if (role === "customer") {
-          localStorage.setItem('pEmail', data.email);
-          localStorage.setItem('customer_id', data.customer_id);
-          localStorage.setItem('pName', data.name);
-          window.location.href = "../page/home.html";
-        } else {
-          localStorage.setItem('sellerEmail', data.email);
-          localStorage.setItem('seller_id', data.seller_id);
-          window.location.href = "../page/seller/seller_home.html";
-        }
-
-      } else {
-        alert("Error: " + (data.detail || "Invalid Credentials"));
-      }
-    } catch (err) {
-      alert("Server is offline. Check FastAPI.");
-    }
-  });
-</script>
+<script src="../page/js/signin.js"></script>
 </body>
 </html>

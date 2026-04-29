@@ -35,3 +35,16 @@
     .btn { width: 100%; margin-top: 25px; background: var(--primary); color: white; border: none; padding: 14px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 16px; }
     .switch-link { margin-top: 15px; display: block; text-decoration: none; color: #666; font-size: 14px; }
     .switch-link b { color: var(--primary); }
+
+    .toggle-container {
+      position: relative; display: flex; background: #f0f0f0;
+      height: 40px; border-radius: 20px; margin: 20px 0; cursor: pointer;
+      border: 1px solid #ddd;
+    }
+    .toggle-container div { flex: 1; text-align: center; line-height: 40px; z-index: 2; font-weight: bold; color: #888; transition: 0.3s; }
+    .toggle-container div.active-text { color: #fff; }
+    .slider {
+      position: absolute; left: 0; top: 0; height: 100%; width: 50%;
+      background: #e84a5f; border-radius: 20px; transition: 0.3s ease; z-index: 1;
+    }
+    .toggle-container.baker-active .slider { left: 50%; }

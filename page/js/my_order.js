@@ -1,48 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Doughlightful - My Orders</title>
-  
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link rel="stylesheet" href="../page/css/home.css">
-  <link rel="stylesheet" href="../page/css/my_order.css">
-  <link rel="stylesheet" href="../page/css/my_order.css">
-</head>
-<body>
-
-  <header class="navbar">
-    <div class="logo">
-      <a href="home.html"><img src="../assets/logo.png" alt="Logo" style="height:40px;"></a>
-      <span style="font-weight: bold; margin-left: 10px;">DOUGHLIGHTFUL</span>
-    </div>
-    <nav>
-      <ul class="nav-links">
-        <li><a href="home.html">HOME</a></li>
-        <li><a href="product.html">PRODUCTS</a></li>
-        <li><a href="my_order.html">MY ORDERS</a></li>
-        <li><a href="profile.html">PROFILE</a></li>
-      </ul>
-    </nav>
-  </header>
-
-  <div class="page">
-    <div class="topbar">
-        <h2 style="color: #ff4d88;">My Orders</h2>
-        <div id="order-count" style="color: #666;">Checking your orders...</div>
-    </div>
-
-    <div id="active-section">
-      <div id="active-order-container">
-        <div class="loading-state" style="text-align:center;">Fetching your order...</div>
-      </div>
-    </div>
-  </div>
-
-  <script>
-  
-    const BACKEND = 'http://127.0.0.1:8000'; 
+const BACKEND = 'http://127.0.0.1:8000'; 
 
     function fmtDate(str) {
       if (!str) return '—';
@@ -127,6 +83,3 @@
     }
 
     document.addEventListener('DOMContentLoaded', loadOrders);
-  </script>
-</body>
-</html>
