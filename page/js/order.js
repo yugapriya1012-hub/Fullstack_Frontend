@@ -1,4 +1,4 @@
-const BACKEND = 'http://127.0.0.1:8000/';
+const BACKEND = 'https://fullstackapi-two.vercel.app/';
 
     function showToast(msg) {
         const toast = document.getElementById('toast');

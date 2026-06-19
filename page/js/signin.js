@@ -24,9 +24,9 @@
 
     let url = "";
     if (role === "customer") {
-        url = "http://127.0.0.1:8000/customers/login";
+        url = "https://fullstackapi-two.vercel.app/customers/login";
     } else {
-        url = "http://127.0.0.1:8000/seller/login"; 
+        url = "https://fullstackapi-two.vercel.app/seller/login"; 
     }
 
     try {

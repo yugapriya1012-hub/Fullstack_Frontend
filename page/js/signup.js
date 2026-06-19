@@ -45,8 +45,8 @@
         
         const role = userRoleInput.value;
         const url = role === "customer" 
-            ? "http://127.0.0.1:8000/customers/" 
-            : "http://127.0.0.1:8000/seller/signup";
+            ? "https://fullstackapi-two.vercel.app/customers/" 
+            : "https://fullstackapi-two.vercel.app/seller/signup";
 
         const payload = {
             name: name,
