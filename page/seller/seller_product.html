@@ -116,7 +116,7 @@ function displayProducts(products) {
 
         if (shouldShow) {
             visibleCount++;
-            const imageUrl = `https://fullstackapi-two.vercel.app/images/products/${product.image}`;
+            const imageUrl = product.image.startsWith('data:image') ? product.image : `https://fullstackapi-two.vercel.app/images/products/${product.image}`;
             const card = document.createElement('div');
             card.className = `product-card ${isOutOfStock ? 'out-of-stock' : ''}`;
             
