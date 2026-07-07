@@ -75,7 +75,7 @@
           </div>`).join('');
 
         return `
-        <div class="active-card">
+        <div class="active-card" style="padding: 20px; margin-bottom: 20px; background: #fff; border-radius: 15px; border: 1px solid #ffd0e0; box-shadow: 0 4px 15px rgba(255,77,136,0.08);">
           <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
             <div style="font-weight:bold; font-size: 1.1rem;">Order #${o.id}</div>
             <div class="eta-badge">${STATUS_LABELS[o.status.toLowerCase()] || o.status}</div>
