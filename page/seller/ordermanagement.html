@@ -179,13 +179,10 @@ document.getElementById("status"+orderId).innerHTML="Rejected"
             </tbody>
     </table>
 </div>
-
 <script>
     const SELLER_ID = localStorage.getItem('seller_id') || 1; 
     const API_BASE_URL = "https://fullstackapi-two.vercel.app/orders";
-
     window.onload = fetchOrders;
-
     async function fetchOrders() {
         if (!SELLER_ID || SELLER_ID === "undefined" || SELLER_ID === "null") {
             alert("Please login as a Seller to view orders!");
@@ -203,11 +200,9 @@ document.getElementById("status"+orderId).innerHTML="Rejected"
             alert("Backend server check pannunga!");
         }
     }
-
     function renderOrders(ordersList) {
         const tbody = document.getElementById('order-table-body');
         tbody.innerHTML = ''; 
-
         ordersList.forEach((order) => {
             const itemsDisplay = order.items.map(i => i.product_name).join(", ");
             
@@ -232,7 +227,6 @@ document.getElementById("status"+orderId).innerHTML="Rejected"
             tbody.innerHTML += row;
         });
     }
-
     async function updateStatus(orderId) {
         const newStatus = document.getElementById(`status-select-${orderId}`).value;
         
@@ -242,7 +236,6 @@ document.getElementById("status"+orderId).innerHTML="Rejected"
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ status: newStatus })
             });
-
             if (response.ok) {
                 alert("Order #" + orderId + " updated to " + newStatus);
                 fetchOrders(); 
@@ -252,6 +245,5 @@ document.getElementById("status"+orderId).innerHTML="Rejected"
         }
     }
 </script>
-
 </body>
 </html>
