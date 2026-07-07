@@ -1,4 +1,4 @@
-const BACKEND = 'https://fullstackapi-two.vercel.app/';
+const BACKEND = 'https://fullstackapi-two.vercel.app';
 
     function showToast(msg) {
         const toast = document.getElementById('toast');
@@ -61,7 +61,7 @@ const BACKEND = 'https://fullstackapi-two.vercel.app/';
 
         try {
             showToast('Placing your order...');
-            const response = await fetch(`${BACKEND}orders/`, {
+            const response = await fetch(`${BACKEND}/orders/`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload)

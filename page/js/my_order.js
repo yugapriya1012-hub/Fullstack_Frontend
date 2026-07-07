@@ -1,4 +1,4 @@
-const BACKEND = 'https://fullstackapi-two.vercel.app/'; 
+const BACKEND = 'https://fullstackapi-two.vercel.app';
 
     function fmtDate(str) {
       if (!str) return '—';
