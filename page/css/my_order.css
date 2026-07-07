@@ -91,12 +91,13 @@
     }
 
     .active-card {
-      background: #fff;
-      border-radius: 20px;
-      border: 1px solid #ffd0e0;
-      overflow: hidden;
-      box-shadow: 0 4px 24px rgba(255,77,136,0.12);
-      margin-bottom: 28px;
+        background: #fff;
+        border-radius: 20px;
+        border: 1px solid #ffd0e0;
+        overflow: hidden;
+        box-shadow: 0 4px 24px rgba(255,77,136,0.12);
+        padding: 20px;
+        margin-bottom: 20px;
     }
     .active-header {
       background: linear-gradient(135deg, #ff4d88 0%, #ff85a2 100%);
